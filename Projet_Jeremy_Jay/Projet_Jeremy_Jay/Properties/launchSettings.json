@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Projet_Jeremy_Jay (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Projet_Jeremy_Jay (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
