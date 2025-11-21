@@ -1,7 +1,39 @@
 Résumé des pages à faire :
 
+[  ] MenuBar pour l'exportation
 [  ] NavigationView principale
-[  ] Page Afficher
+
+[  ] Page AfficherEmploye
+[  ] Page AjouterEmploye
+[  ] Page ModifierEmploye
+
+[  ] Page AfficherClient
+[  ] Page AjouterClient
+[  ] Page ModifierClient
+
+[  ] Page AfficherProjet
+[  ] Page DétailsProjets
+[  ] Page AjouterProjet
+[  ] Page ModifierProjet
+
+[  ] Page AssignationEmployeProjet
+
+[  ] PageConnexion
+
+---------------------------------------------------------------------------------------------------------
+
+Résumé des classes à faire :
+
+[  ] Employé
+[  ] Client
+[  ] Projet
+[  ] Administrateur
+
+[  ] SingletonEmployé
+[  ] SingletonClient
+[  ] SingletonProjet
+
+---------------------------------------------------------------------------------------------------------
 
 Gestion :
 
@@ -19,6 +51,8 @@ Statut (journalier ou permanent)
 [  ] Ajouter un employé
 [  ] Modifier les informations de l'employé (sauf matricule et date embauche / date naissance)
 
+[  ] Validation de données
+
 ---------------------------------------------------------------------------------------------------------
 
 [  ] Les clients
@@ -29,6 +63,10 @@ Num. de téléphone
 Email
 
 [  ] Afficher la liste des clients
+[  ] Ajouter un client
+[  ] Modifier les infos du client
+
+[  ] Validation de données
 
 ---------------------------------------------------------------------------------------------------------
 
@@ -57,6 +95,11 @@ Affichage des projets :
     [  ] Afficher la liste des employés + taux horaire, nb heures travaillées, salaire
     [  ] Afficher le total des salaires à payer
 
+[  ] Ajouter un projet
+[  ] Modifier les infos du projet
+
+[  ] Validation de données
+
 ---------------------------------------------------------------------------------------------------------
 
 Assignation des employés
@@ -79,6 +122,14 @@ Options d'administration
   [  ] Supprimer
 
 **L'admin est lecture seule si il n'est pas connecté**
+
+---------------------------------------------------------------------------------------------------------
+
+Exportation de données
+
+[  ] Exporter les projets sur un fichier CSV ( sans tenir compte des employés du projets)
+
+**L'identifiant et le nom du client doivent être présents**
 
 
 
