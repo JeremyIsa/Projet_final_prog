@@ -1,0 +1,85 @@
+Résumé des pages à faire :
+
+[  ] NavigationView principale
+[  ] Page Afficher
+
+Gestion :
+
+[  ] Les employés :
+Matricule (Unique, 2 premières lettres du nom + années de naissance + nb aléatoire entre 10 et 99)
+Date de naissance
+Email
+Adresse
+Date embauche
+Taux horaire (minimum 15$ /h)
+Photo identité (lien vers une image)
+Statut (journalier ou permanent)
+
+[  ] Afficher la liste des employés
+[  ] Ajouter un employé
+[  ] Modifier les informations de l'employé (sauf matricule et date embauche / date naissance)
+
+---------------------------------------------------------------------------------------------------------
+
+[  ] Les clients
+Identifiant (Unique, valeur entre 100 et 999)
+Nom
+Adresse
+Num. de téléphone
+Email
+
+[  ] Afficher la liste des clients
+
+---------------------------------------------------------------------------------------------------------
+
+[  ] Les projets
+Num. de projet (Unique, Num. du client + valeur entre 01 et 99 + année de début (Ex. 255-10-2025))
+Ttire
+Date début
+Description
+Budget
+Nb employés requis (max 5)
+Total salaires à payer (Taux horaire * nb heures travaillées * nb employés)
+Client (Identifiant du client)
+Statut (Terminé ou En cours) **En cours est la valeur par défaut**
+
+**Si un employé est sur un projet, il ne peut pas être assigné**
+
+---------------------------------------------------------------------------------------------------------
+
+Affichage des projets :
+
+[  ] Affichage de tous les projets (Numéro du projet, titre, nom du client, date début, budget)
+
+  Page de détails (au clic d'un projet)
+
+    [  ] Afficher toutes les informations du projets
+    [  ] Afficher la liste des employés + taux horaire, nb heures travaillées, salaire
+    [  ] Afficher le total des salaires à payer
+
+---------------------------------------------------------------------------------------------------------
+
+Assignation des employés
+
+[  ] Afficher les projets en cours
+[  ] Afficher les employés disponibles pour un projet
+
+---------------------------------------------------------------------------------------------------------
+
+Compte administration
+
+[  ] Bouton et page de connexion pour l'administrateur (Nom d'utilisateur, mot de passe crypté)
+[  ] Bouton de déconnexion
+**Une seule connexion à la première utilisation**
+
+Options d'administration
+
+  [  ] Ajouter
+  [  ] Modifier
+  [  ] Supprimer
+
+**L'admin est lecture seule si il n'est pas connecté**
+
+
+
+  
