@@ -14,6 +14,36 @@
     </Window.SystemBackdrop>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <MenuBar Grid.Row="0" >
+            <MenuBarItem Title="Fichier" >
+                <MenuFlyoutItem Text="Exporter" Tag="exporter" Click="gestion_clic_item_menu"/>
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem Text="Quitter" Tag="quitter" Click="gestion_clic_item_menu"/>
+            </MenuBarItem>
+        </MenuBar>
+
+        <NavigationView BackRequested="navView_BackRequested" IsBackButtonVisible="Visible" IsSettingsVisible="True" IsBackEnabled="True"  Grid.Row="1" PaneDisplayMode="Left" PaneTitle="MON TITRE" x:Name="navView" ItemInvoked="navView_ItemInvoked" >
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Clients" x:Name="iClients" Icon="People" Tag="clients"/>
+                <NavigationViewItem Content="Employé" x:Name="iEmploye" Icon="AddFriend" Tag="employe"/>
+                <NavigationViewItem Content="Connecxion" x:Name="iConnecxion" Icon="Admin" Tag="connecxion"/>
+                <NavigationViewItemSeparator />
+                <NavigationViewItem Content="Projet" x:Name="iProjet" Icon="Shop" Tag="projet"/>
+            </NavigationView.MenuItems>
+            <Frame x:Name="mainFrame" />
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Déconnexion" x:Name="iDeconnexion" Icon="Switch" Tag="deconnexion" />
+                <NavigationViewItem Content="Aide" x:Name="iAide" Icon="Help" Tag="aide"/>
+            </NavigationView.FooterMenuItems>
+
+
+        </NavigationView>
+
 
     </Grid>
 </Window>
