@@ -8,7 +8,51 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Padding="20" RowDefinitions="Auto,Auto,*">
+
+        <TextBlock Text="Liste des maisons"
+                FontSize="28"
+                FontWeight="Bold"
+                Margin="0,0,0,20"
+                HorizontalAlignment="Center"/>
+
+        <!-- Filtres -->
+        <StackPanel Orientation="Horizontal" Spacing="15" Grid.Row="1">
+
+            <!-- Filtre catégorie -->
+            <ComboBox x:Name="cbFiltreCategorie"
+                   Width="200"
+                   PlaceholderText="Catégorie"
+                   SelectionChanged="Filtre_Changed">
+                <ComboBoxItem Content="Condo"/>
+                <ComboBoxItem Content="Unifamiliale"/>
+                <ComboBoxItem Content="Jumelé"/>
+            </ComboBox>
+
+            <!-- Filtre ville -->
+            <TextBox x:Name="tbFiltreVille"
+                  Width="200"
+                  PlaceholderText="Ville"
+                  TextChanged="Filtre_Changed"/>
+        </StackPanel>
+
+
+        <!-- Liste -->
+        <GridView x:Name="lvMaisons"
+               Grid.Row="2"
+               ItemsSource="">
+            <GridView.ItemTemplate>
+                <DataTemplate >
+                    <StackPanel Margin="5">
+                        <TextBlock Text="{x:Bind Ville}" FontWeight="Bold"/>
+                        <TextBlock Text="{x:Bind Cate}"/>
+                        <TextBlock Text="{x:Bind Prix, Mode=OneWay}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
 
     </Grid>
+
+
 </Page>
