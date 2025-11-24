@@ -23,14 +23,16 @@
     <None Remove="AjouterEmploye.xaml" />
     <None Remove="AjouterProjet.xaml" />
     <None Remove="AssignationEmployeProjet.xaml" />
-    <None Remove="Client.xaml" />
-    <None Remove="Connecxion.xaml" />
-    <None Remove="DetailsProjet.xaml" />
-    <None Remove="Employé.xaml" />
-    <None Remove="ModifierClient.xaml" />
-    <None Remove="ModifierEmploye.xaml" />
-    <None Remove="ModifierProjet.xaml" />
-    <None Remove="Projet.xaml" />
+    <None Remove="Pages\Client\AfficherClient.xaml" />
+    <None Remove="Pages\Client\AjouterClient.xaml" />
+    <None Remove="Pages\Client\ModifierClient.xaml" />
+    <None Remove="Pages\Connexion\PageConnexion.xaml" />
+    <None Remove="Pages\Employé\AfficherEmploye.xaml" />
+    <None Remove="Pages\Employé\AjouterEmploye.xaml" />
+    <None Remove="Pages\Employé\ModifierEmploye.xaml" />
+    <None Remove="Pages\Projet\AfficherProjet.xaml" />
+    <None Remove="Pages\Projet\AjouterProjet.xaml" />
+    <None Remove="Pages\Projet\ModifierProjet.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,22 +68,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="ModifierProjet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="AjouterProjet.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="DetailsProjet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="ModifierClient.xaml">
+    <Page Update="PageModifierClient.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -91,32 +83,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="ModifierEmploye.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="AjouterEmploye.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Connecxion.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Projet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Client.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Employé.xaml">
+    <Page Update="PageAfficherClient.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -139,5 +111,55 @@
   </PropertyGroup>
   <ItemGroup>
     <PRIResource Remove="Page\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Projet\ModifierProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Projet\AjouterProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Projet\AfficherProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Employé\ModifierEmploye.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Employé\AjouterEmploye.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Employé\AfficherEmploye.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Client\ModifierClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Client\AjouterClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Client\AfficherClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Connexion\PageConnexion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

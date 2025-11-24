@@ -27,18 +27,30 @@
             </MenuBarItem>
         </MenuBar>
 
-        <NavigationView BackRequested="navView_BackRequested" IsBackButtonVisible="Visible" IsSettingsVisible="True" IsBackEnabled="True"  Grid.Row="1" PaneDisplayMode="Left" PaneTitle="MON TITRE" x:Name="navView" ItemInvoked="navView_ItemInvoked" >
+        <NavigationView BackRequested="navView_BackRequested" 
+                        IsBackButtonVisible="Visible" 
+                        IsSettingsVisible="False" 
+                        IsBackEnabled="True"  
+                        Grid.Row="1" 
+                        PaneDisplayMode="Left" 
+                        PaneTitle="TRAVAIL DE SESSION" 
+                        x:Name="navView" 
+                        ItemInvoked="navView_ItemInvoked" >
+            
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Clients" x:Name="iClients" Icon="People" Tag="clients"/>
                 <NavigationViewItem Content="Employé" x:Name="iEmploye" Icon="AddFriend" Tag="employe"/>
-                <NavigationViewItem Content="Connecxion" x:Name="iConnecxion" Icon="Admin" Tag="connecxion"/>
-                <NavigationViewItemSeparator />
                 <NavigationViewItem Content="Projet" x:Name="iProjet" Icon="Shop" Tag="projet"/>
+                
+                <NavigationViewItemSeparator />
+
+                <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="Admin" Tag="connexion"/>
             </NavigationView.MenuItems>
+            
             <Frame x:Name="mainFrame" />
+            
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="Déconnexion" x:Name="iDeconnexion" Icon="Switch" Tag="deconnexion" />
-                <NavigationViewItem Content="Aide" x:Name="iAide" Icon="Help" Tag="aide"/>
             </NavigationView.FooterMenuItems>
 
 

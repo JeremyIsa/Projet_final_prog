@@ -5,6 +5,10 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Jeremy_Jay.Pages.Client;
+using Projet_Jeremy_Jay.Pages.Connexion;
+using Projet_Jeremy_Jay.Pages.Employé;
+using Projet_Jeremy_Jay.Pages.Projet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,16 +61,16 @@ namespace Projet_Jeremy_Jay
                 switch (item.Tag)
                 {
                     case "clients":
-                        mainFrame.Navigate(typeof(Client));
+                        mainFrame.Navigate(typeof(AfficherClient));
                         break;
                     case "employe":
-                        mainFrame.Navigate(typeof(Employé));
+                        mainFrame.Navigate(typeof(AfficherEmploye));
                         break;
                     case "projet":
-                        mainFrame.Navigate(typeof(Projet));
+                        mainFrame.Navigate(typeof(AfficherProjet));
                         break;
-                    case "connecxion":
-                        mainFrame.Navigate(typeof(Connecxion));
+                    case "connexion":
+                        mainFrame.Navigate(typeof(PageConnexion));
                         break;
 
                     default:
