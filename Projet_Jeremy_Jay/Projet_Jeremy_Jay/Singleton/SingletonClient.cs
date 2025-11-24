@@ -8,5 +8,8 @@ namespace Projet_Jeremy_Jay
 {
     class SingletonClient
     {
+
+
+
     }
 }
