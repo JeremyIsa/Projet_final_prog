@@ -5,8 +5,10 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.WindowsAppSDK.Runtime.Packages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,9 +25,33 @@ namespace Projet_Jeremy_Jay.Pages.Employé
     /// </summary>
     public sealed partial class AfficherEmploye : Page
     {
+
+        public ObservableCollection<Classes.Employe> ListeEmploye { get; set; }
+
         public AfficherEmploye()
         {
             InitializeComponent();
+
+            ListeEmploye = new ObservableCollection<Classes.Employe>();
+
+
+            ChargerEmploye();
+        
+        }
+
+        private void ChargerEmploye()
+        {
+            SingletonEmploye.getInstance().getAllEmploye();
+
+            ListeEmploye.Clear();
+
+            foreach (var m in SingletonEmploye.getInstance().Liste)
+                ListeEmploye.Add(m);
+        }
+
+        private void btnRedirection_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AjouterEmploye));
         }
     }
 }

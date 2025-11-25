@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projet_Jeremy_Jay.Classes
 {
-    class Employe
+  public  class Employe
     {
         string matricule;
         string num_projet;
@@ -18,9 +18,9 @@ namespace Projet_Jeremy_Jay.Classes
         DateTime date_embauche;
         double taux_horaire;
         string photo_id;
-        string status;
+        string statut;
 
-        public Employe(string matricule, string num_projet, string prenom, string nom, DateTime date_naissance, string email, string adresse, DateTime date_embauche, double taux_horaire, string photo_id, string status)
+        public Employe(string matricule, string num_projet, string prenom, string nom, DateTime date_naissance, string email, string adresse, DateTime date_embauche, double taux_horaire, string photo_id, string statut)
         {
             this.matricule = matricule;
             this.num_projet = num_projet;
@@ -32,7 +32,7 @@ namespace Projet_Jeremy_Jay.Classes
             this.date_embauche = date_embauche;
             this.taux_horaire = taux_horaire;
             this.photo_id = photo_id;
-            this.status = status;
+            this.statut = statut;
         }
 
         public string Prenom { get => prenom; set => prenom = value; }
@@ -43,7 +43,7 @@ namespace Projet_Jeremy_Jay.Classes
         public DateTime Date_embauche { get => date_embauche; set => date_embauche = value; }
         public double Taux_horaire { get => taux_horaire; set => taux_horaire = value; }
         public string Photo_id { get => photo_id; set => photo_id = value; }
-        public string Status { get => status; set => status = value; }
+        public string Statut { get => statut; set => statut = value; }
 
         public override string? ToString()
         {

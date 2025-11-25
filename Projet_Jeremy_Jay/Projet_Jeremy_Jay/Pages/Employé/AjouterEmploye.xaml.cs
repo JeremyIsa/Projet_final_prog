@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Jeremy_Jay.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,17 @@ namespace Projet_Jeremy_Jay.Pages.Employé
         public AjouterEmploye()
         {
             InitializeComponent();
+        
+        
+        }
+
+
+
+        private void btn_AJouter(object sender, RoutedEventArgs e)
+        {
+
+      
+
         }
     }
 }

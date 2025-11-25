@@ -43,6 +43,7 @@ namespace Projet_Jeremy_Jay
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "fr-CA";
             _window = new MainWindow();
             _window.Activate();
         }

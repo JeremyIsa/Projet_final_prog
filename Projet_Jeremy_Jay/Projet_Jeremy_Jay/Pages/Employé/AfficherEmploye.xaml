@@ -6,53 +6,51 @@
     xmlns:local="using:Projet_Jeremy_Jay.Pages.Employé"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:Classes="using:Projet_Jeremy_Jay.Classes"
     mc:Ignorable="d">
 
     <Grid Padding="20" RowDefinitions="Auto,Auto,*">
-
-        <TextBlock Text="Liste des maisons"
+        <TextBlock Text="Liste des Employé"
                 FontSize="28"
                 FontWeight="Bold"
                 Margin="0,0,0,20"
                 HorizontalAlignment="Center"/>
 
-        <!-- Filtres -->
-        <StackPanel Orientation="Horizontal" Spacing="15" Grid.Row="1">
-
-            <!-- Filtre catégorie -->
-            <ComboBox x:Name="cbFiltreCategorie"
-                   Width="200"
-                   PlaceholderText="Catégorie"
-                   SelectionChanged="Filtre_Changed">
-                <ComboBoxItem Content="Condo"/>
-                <ComboBoxItem Content="Unifamiliale"/>
-                <ComboBoxItem Content="Jumelé"/>
-            </ComboBox>
-
-            <!-- Filtre ville -->
-            <TextBox x:Name="tbFiltreVille"
-                  Width="200"
-                  PlaceholderText="Ville"
-                  TextChanged="Filtre_Changed"/>
-        </StackPanel>
+       <Button x:Name="btnAjouter"
+            Content="Ajouter un employé"
+            Grid.Row="1"
+            Width="200"
+            Height="40"
+            HorizontalAlignment="Center"
+            Background="#0078D7"
+            Foreground="White"
+            Click="btnRedirection_Click"/>
 
 
-        <!-- Liste -->
-        <GridView x:Name="lvMaisons"
-               Grid.Row="2"
-               ItemsSource="">
+
+        <GridView x:Name="lvEmployes"
+          Grid.Row="2"
+          ItemsSource="{x:Bind ListeEmploye}">
             <GridView.ItemTemplate>
-                <DataTemplate >
-                    <StackPanel Margin="5">
-                        <TextBlock Text="{x:Bind Ville}" FontWeight="Bold"/>
-                        <TextBlock Text="{x:Bind Cate}"/>
-                        <TextBlock Text="{x:Bind Prix, Mode=OneWay}"/>
+                <DataTemplate x:DataType="Classes:Employe">
+                    <StackPanel Margin="10">
+
+                        <TextBlock Text="{x:Bind Prenom}" FontWeight="Bold" FontSize="18"/>
+                        <TextBlock Text="{x:Bind Nom}" FontSize="16"/>
+
+                        <TextBlock Text="Informations :" FontWeight="SemiBold" Margin="0,8,0,0"/>
+
+                        <TextBlock Text="{x:Bind Email}" />
+                        <TextBlock Text="{x:Bind Adresse}" />
+                        <TextBlock Text="{x:Bind Date_naissance, Mode=OneWay}" />
+                        <TextBlock Text="{x:Bind Date_embauche, Mode=OneWay}" />
+                        <TextBlock Text="{x:Bind Taux_horaire}" />
+                        <TextBlock Text="{x:Bind Statut}" />
+
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-
     </Grid>
-
 
 </Page>
