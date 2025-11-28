@@ -5,8 +5,11 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.WindowsAppSDK.Runtime.Packages;
+using Projet_Jeremy_Jay.Pages.Employé;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,9 +26,34 @@ namespace Projet_Jeremy_Jay.Pages.Client
     /// </summary>
     public sealed partial class AfficherClient : Page
     {
+        public ObservableCollection<Classes.Client> ListeClient { get; set; }
+
         public AfficherClient()
         {
             InitializeComponent();
+            ListeClient = new ObservableCollection<Classes.Client>();
+            ChargerClient();
+        }
+
+        private void ChargerClient()
+        {
+            SingletonClient.getInstance().getAllClient();
+            ListeClient.Clear();
+            foreach (var m in SingletonClient.getInstance().Liste)
+                ListeClient.Add(m);
+        }
+
+        private void btnAjouter_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AjouterClient));
+        }
+
+        private void btnModifier_Click(object sender, RoutedEventArgs e)
+        {
+            var bouton = sender as Button;
+            var employe = bouton.DataContext as Classes.Client;
+
+            Frame.Navigate(typeof(ModifierClient));
         }
     }
 }
