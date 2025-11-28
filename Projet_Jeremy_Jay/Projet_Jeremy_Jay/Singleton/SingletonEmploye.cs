@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,20 +50,20 @@ namespace Projet_Jeremy_Jay
                 while (r.Read())
                 {
                     double taux_horaire = r.GetDouble("taux_horaire");
-                    DateTime date_naissance = r.GetDateTime("date_naissance");
-                    DateTime date_embauche = r.GetDateTime("date_embauche");
-
+                    DateOnly date_naissance = DateOnly.FromDateTime(r.GetDateTime("date_naissance"));
+                    DateOnly date_embauche = DateOnly.FromDateTime(r.GetDateTime("date_embauche"));
+                  
                     string matricule = r.GetString("matricule");
                     string nom = r.GetString("nom");
                     string prenom = r.GetString("prenom");
                     string email = r.GetString("email");
                     string adresse = r.GetString("adresse");
-                    string photo = r.GetString("photo");     // <<< corrigé
+                    string photo = r.GetString("photo");    
                     string statut = r.GetString("statut");
 
                     Employe e = new Employe(matricule, prenom, nom, date_naissance,
                                             email, adresse, date_embauche,
-                                            taux_horaire, photo, statut); // <<< photo
+                                            taux_horaire, photo, statut); 
                     ListeEmploye.Add(e);
                 }
             }
@@ -73,8 +74,8 @@ namespace Projet_Jeremy_Jay
         }
 
         public void ajouterEmploye(string prenom, string nom,
-                            DateTime date_naissance, string email, string adresse,
-                            DateTime date_embauche, double taux_horaire,
+                              DateOnly date_naissance, string email, string adresse,
+                              DateOnly date_embauche, double taux_horaire,
                             string photo, string statut)
         {
             using MySqlConnection con = new MySqlConnection(connectionString);
@@ -121,40 +122,22 @@ namespace Projet_Jeremy_Jay
       
             ListeEmploye.Add(e);
         }
-        public void SupprimerEmploye(string matricule)
-        {
-            try
-            {
-                using MySqlConnection con = new MySqlConnection(connectionString);
-                using MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = con;
-
-                cmd.CommandText = "DELETE FROM employe WHERE matricule = @matricule";
-                cmd.Parameters.AddWithValue("@matricule", matricule);
-
-                con.Open();
-                cmd.ExecuteNonQuery();
-
-                getAllEmploye();
-            }
-            catch (MySqlException ex)
-            {
-                Debug.WriteLine("Erreur suppression employé : " + ex.Message);
-            }
-        }
+        
 
         public void ModifierEmploye(string matricule, string prenom, string nom,
-                                    DateTime date_naissance, string email, string adresse,
-                                    DateTime date_embauche, double taux_horaire,
+                                      DateOnly date_naissance, string email, string adresse,
+                                     DateOnly date_embauche, double taux_horaire,
                                     string photo, string statut)
         {
             try
             {
+
+
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = con;
-
-                cmd.CommandText = @"
+               
+        cmd.CommandText = @"
                     UPDATE employe
                     SET prenom = @prenom,
                         nom = @nom,
@@ -175,7 +158,7 @@ namespace Projet_Jeremy_Jay
                 cmd.Parameters.AddWithValue("@adresse", adresse);
                 cmd.Parameters.AddWithValue("@date_embauche", date_embauche);
                 cmd.Parameters.AddWithValue("@taux_horaire", taux_horaire);
-                cmd.Parameters.AddWithValue("@photo", photo);       // <<< corrigé
+                cmd.Parameters.AddWithValue("@photo", photo);     
                 cmd.Parameters.AddWithValue("@statut", statut);
 
                 con.Open();

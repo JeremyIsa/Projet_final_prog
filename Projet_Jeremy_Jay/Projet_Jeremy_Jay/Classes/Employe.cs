@@ -11,16 +11,16 @@ namespace Projet_Jeremy_Jay.Classes
         string matricule;
         string prenom;
         string nom;
-        DateTime date_naissance;
+        DateOnly  date_naissance;
         string email;
         string adresse;
-        DateTime date_embauche;
+        DateOnly  date_embauche;
         double taux_horaire;
         string photo;  
         string statut;
 
-        public Employe(string matricule, string prenom, string nom, DateTime date_naissance,
-                       string email, string adresse, DateTime date_embauche,
+        public Employe(string matricule, string prenom, string nom, DateOnly date_naissance,
+                       string email, string adresse, DateOnly date_embauche,
                        double taux_horaire, string photo, string statut)
         {
             this.matricule = matricule;
@@ -38,12 +38,12 @@ namespace Projet_Jeremy_Jay.Classes
         public string Matricule { get => matricule; set => matricule = value; }
         public string Prenom { get => prenom; set => prenom = value; }
         public string Nom { get => nom; set => nom = value; }
-        public DateTime Date_naissance { get => date_naissance; set => date_naissance = value; }
+        public DateOnly Date_naissance { get => date_naissance; set => date_naissance = value; }
         public string Email { get => email; set => email = value; }
         public string Adresse { get => adresse; set => adresse = value; }
-        public DateTime Date_embauche { get => date_embauche; set => date_embauche = value; }
+        public DateOnly Date_embauche { get => date_embauche; set => date_embauche = value; }
         public double Taux_horaire { get => taux_horaire; set => taux_horaire = value; }
-        public string Photo { get => photo; set => photo = value; }  // <<< corrigé
+        public string Photo { get => photo; set => photo = value; }  
         public string Statut { get => statut; set => statut = value; }
 
 public override string? ToString()

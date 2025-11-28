@@ -59,15 +59,7 @@ namespace Projet_Jeremy_Jay.Pages.Employé
             Frame.Navigate(typeof(ModifierEmploye));
         }
 
-        private void Button_Supprimer(object sender, RoutedEventArgs e)
-        {
-            var bouton = sender as Button;
-            var employe = bouton.DataContext as Classes.Employe;
-
-            SingletonEmploye.getInstance().SupprimerEmploye(employe.Matricule);
-            ListeEmploye.Remove(employe);
-
-        }
+    
 
 
 

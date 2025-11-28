@@ -10,5 +10,53 @@
 
     <Grid>
 
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+
+            <Image x:Name="imgAlbum"
+           Grid.Column="0"
+           Stretch="Uniform"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"
+           Width="300"
+           Height="300"
+           Margin="10"/>
+
+
+            <StackPanel Grid.Column="1" Margin="30,0,0,0" Spacing="5">
+
+                <TextBox x:Name="tbxPrenom" Header="Nom de l'album"/>
+                <TextBlock x:Name="errPrenom" Foreground="Red" FontSize="12"/>
+
+                <TextBox x:Name="tbxNom" Header="Nom de l'artiste"/>
+                <TextBlock x:Name="errNom" Foreground="Red" FontSize="12"/>
+
+                <TextBox x:Name="tbxPhoto" Header="URL de la photo"/>
+                <TextBlock x:Name="errPhoto" Foreground="Red" FontSize="12"/>
+                <TextBox x:Name="tbxEmail" Header="Email" PlaceholderText="Ex: jean@gmail.com"/>
+                <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12"/>
+
+                <TextBox x:Name="tbxAdresse" Header="Adresse" PlaceholderText="Ex: 123 Rue Principale"/>
+                <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12"/>
+                <NumberBox x:Name="nbTauxHoraire" Header="Taux horaire ($/h)" PlaceholderText="Ex: 22.50"/>
+                <TextBlock x:Name="errTaux" Foreground="Red" FontSize="12"/>
+                <ComboBox x:Name="cbStatut" Header="Statut" PlaceholderText="Choisir">
+                    <ComboBoxItem Content="journalier"/>
+                    <ComboBoxItem Content="permanent"/>
+                </ComboBox>
+                <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12"/>
+
+                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,10,0,0">
+                    <Button Content="Sauvegarder" Background="LightGreen" Click="Button_Click_Save"/>
+                    <Button Content="Annuler" Background="LightGray" Click="Button_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+
     </Grid>
 </Page>

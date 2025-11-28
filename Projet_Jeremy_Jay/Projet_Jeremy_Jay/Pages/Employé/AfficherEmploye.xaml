@@ -101,6 +101,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Taux horaire : " FontWeight="Bold"/>
                                     <TextBlock Text="{x:Bind Taux_horaire}"/>
+                                    <TextBlock Text="$/h"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal">
@@ -119,11 +120,6 @@
                                 Width="90"
                              Click="Button_Modifier"/>
 
-                                <Button Content="Supprimer"
-                                Background="#D70000"
-                                Foreground="White"
-                                Width="90"
-                              Click="Button_Supprimer"/>
                             </StackPanel>
 
                         </StackPanel>
