@@ -84,9 +84,18 @@ namespace Projet_Jeremy_Jay.Pages.Employé
                 errPrenom.Text = "Le prénom doit avoir entre 3 et 100 caractères.";
                 valide = false;
             }
-         
 
 
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                errEmail.Text = "Veuillez entrer un email.";
+                valide = false;
+            }
+            else if (!email.Contains("@") || !email.Contains("."))
+            {
+                errEmail.Text = "Email invalide.";
+                valide = false;
+            }
 
             if (string.IsNullOrWhiteSpace(statut))
             {
@@ -139,6 +148,11 @@ namespace Projet_Jeremy_Jay.Pages.Employé
         }
 
     }
+
+        private void Button_Retour(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
     }
 
 

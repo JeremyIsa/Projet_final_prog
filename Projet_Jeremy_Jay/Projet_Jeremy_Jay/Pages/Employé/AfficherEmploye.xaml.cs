@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.WindowsAppSDK.Runtime.Packages;
+using Projet_Jeremy_Jay.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -53,11 +54,11 @@ namespace Projet_Jeremy_Jay.Pages.Employé
             private void Button_Modifier(object sender, RoutedEventArgs e)
         {
             var bouton = sender as Button;
-            var employe = bouton.DataContext as Classes.Employe;
+            var employe = bouton.DataContext as Employe;
 
-          
-            Frame.Navigate(typeof(ModifierEmploye));
+            Frame.Navigate(typeof(ModifierEmploye), employe);
         }
+        
 
     
 

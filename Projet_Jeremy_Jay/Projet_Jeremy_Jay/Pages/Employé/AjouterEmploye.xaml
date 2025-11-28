@@ -12,6 +12,16 @@
 
     <ScrollViewer>
         <Grid Padding="30">
+            <Button Content="⟵ Retour"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="0,0,0,15"
+                    Click="Button_Retour"
+                    Background="#DDDDDD"
+                    Foreground="Black"
+                    Padding="10,5"
+                    />
+
             <StackPanel Width="450" HorizontalAlignment="Center" Spacing="5">
 
                 <TextBlock Text="Ajouter un employé"

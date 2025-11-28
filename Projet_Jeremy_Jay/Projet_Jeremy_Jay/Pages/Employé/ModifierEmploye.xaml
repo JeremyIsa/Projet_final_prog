@@ -16,34 +16,35 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-
-            <Image x:Name="imgAlbum"
-           Grid.Column="0"
-           Stretch="Uniform"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"
-           Width="300"
-           Height="300"
-           Margin="10"/>
-
+            <Image x:Name="Photo"
+                   Grid.Column="0"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Width="300"
+                   Height="300"
+                   Margin="10"/>
 
             <StackPanel Grid.Column="1" Margin="30,0,0,0" Spacing="5">
 
-                <TextBox x:Name="tbxPrenom" Header="Nom de l'album"/>
+                <TextBox x:Name="tbxPrenom" Header="Prénom"/>
                 <TextBlock x:Name="errPrenom" Foreground="Red" FontSize="12"/>
 
-                <TextBox x:Name="tbxNom" Header="Nom de l'artiste"/>
+                <TextBox x:Name="tbxNom" Header="Nom"/>
                 <TextBlock x:Name="errNom" Foreground="Red" FontSize="12"/>
 
                 <TextBox x:Name="tbxPhoto" Header="URL de la photo"/>
                 <TextBlock x:Name="errPhoto" Foreground="Red" FontSize="12"/>
+
                 <TextBox x:Name="tbxEmail" Header="Email" PlaceholderText="Ex: jean@gmail.com"/>
                 <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12"/>
 
                 <TextBox x:Name="tbxAdresse" Header="Adresse" PlaceholderText="Ex: 123 Rue Principale"/>
                 <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12"/>
-                <NumberBox x:Name="nbTauxHoraire" Header="Taux horaire ($/h)" PlaceholderText="Ex: 22.50"/>
+
+                <NumberBox x:Name="nbTauxHoraire" Header="Taux horaire ($/h)"/>
                 <TextBlock x:Name="errTaux" Foreground="Red" FontSize="12"/>
+
                 <ComboBox x:Name="cbStatut" Header="Statut" PlaceholderText="Choisir">
                     <ComboBoxItem Content="journalier"/>
                     <ComboBoxItem Content="permanent"/>
@@ -56,7 +57,6 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-
 
     </Grid>
 </Page>
