@@ -9,74 +9,43 @@
     mc:Ignorable="d">
 
 
+
     <ScrollViewer>
         <Grid Padding="30">
-        <StackPanel Width="450" HorizontalAlignment="Center" Spacing="15">
+            <StackPanel Width="450" HorizontalAlignment="Center" Spacing="15">
 
-            <!-- Titre -->
-            <TextBlock Text="Ajouter un employé"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,20"/>
+                <TextBlock Text="Ajouter un employé"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
 
-            <TextBox x:Name="tbxMatricule"
-                 Header="Matricule"
-                 PlaceholderText="Ex: EMP001"/>
+                <TextBox x:Name="tbxPrenom" Header="Prénom" PlaceholderText="Ex: Jean"/>
+                <TextBox x:Name="tbxNom" Header="Nom" PlaceholderText="Ex: Tremblay"/>
 
-            <TextBox x:Name="tbxPrenom"
-                 Header="Prénom"
-                 PlaceholderText="Ex: Jean"/>
+                <DatePicker x:Name="dpNaissance" Header="Date de naissance"/>
 
-            <TextBox x:Name="tbxNom"
-                 Header="Nom"
-                 PlaceholderText="Ex: Tremblay"/>
+                <TextBox x:Name="tbxEmail" Header="Email" PlaceholderText="Ex: jean@gmail.com"/>
+                <TextBox x:Name="tbxAdresse" Header="Adresse" PlaceholderText="Ex: 123 Rue Principale"/>
 
-            <DatePicker x:Name="dpNaissance"
-                    Header="Date de naissance"/>
+                <DatePicker x:Name="dpEmbauche" Header="Date d'embauche"/>
 
-           
-            <TextBox x:Name="tbxEmail"
-                 Header="Email"
-                 PlaceholderText="Ex: jean@gmail.com"/>
+                <NumberBox x:Name="nbTauxHoraire" Header="Taux horaire ($/h)" PlaceholderText="Ex: 22.50"/>
 
-           
-            <TextBox x:Name="tbxAdresse"
-                 Header="Adresse"
-                 PlaceholderText="Ex: 123 Rue Principale"/>
+                <ComboBox x:Name="cbStatut" Header="Statut" PlaceholderText="Choisir">
+                    <ComboBoxItem Content="journalier"/>
+                    <ComboBoxItem Content="permanent"/>
+                </ComboBox>
 
-         
-            <DatePicker x:Name="dpEmbauche"
-                    Header="Date d'embauche"/>
+                <TextBox x:Name="tbxPhoto" Header="Photo ID" PlaceholderText="Ex: photo123.jpg"/>
 
-            <NumberBox x:Name="nbTauxHoraire"
-                   Header="Taux horaire ($/h)"
-                   PlaceholderText="Ex: 25.50"/>
-
-            <TextBox x:Name="tbxProjet"
-                 Header="Numéro de projet"
-                 PlaceholderText="Ex: P001"/>
-
-            <ComboBox x:Name="cbStatut"
-                  Header="Statut"
-                  PlaceholderText="Choisir">
-                <ComboBoxItem Content="journalier"/>
-                <ComboBoxItem Content="permanant"/>
-            </ComboBox>
-
-        
-            <TextBox x:Name="tbxPhoto"
-                 Header="Photo ID"
-                 PlaceholderText="Ex: photo123.jpg"/>
-
-          
-            <Button Content="Ajouter"
-                Height="45"
-                Background="#0078D7"
-                Foreground="White"
-                Click="btn_AJouter"/>
-        </StackPanel>
-    </Grid>
+                <Button Content="Ajouter"
+                        Height="45"
+                        Background="#0078D7"
+                        Foreground="White"
+                        Click="btn_AJouter"/>
+            </StackPanel>
+        </Grid>
     </ScrollViewer>
 
 </Page>

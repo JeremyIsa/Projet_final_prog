@@ -49,9 +49,33 @@ namespace Projet_Jeremy_Jay.Pages.Employé
                 ListeEmploye.Add(m);
         }
 
+     
+            private void Button_Modifier(object sender, RoutedEventArgs e)
+        {
+            var bouton = sender as Button;
+            var employe = bouton.DataContext as Classes.Employe;
+
+          
+            Frame.Navigate(typeof(ModifierEmploye));
+        }
+
+        private void Button_Supprimer(object sender, RoutedEventArgs e)
+        {
+            var bouton = sender as Button;
+            var employe = bouton.DataContext as Classes.Employe;
+
+            SingletonEmploye.getInstance().SupprimerEmploye(employe.Matricule);
+            ListeEmploye.Remove(employe);
+
+        }
+
+
+
         private void btnRedirection_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AjouterEmploye));
         }
+
+      
     }
 }

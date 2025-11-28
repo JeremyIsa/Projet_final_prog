@@ -35,9 +35,35 @@ namespace Projet_Jeremy_Jay.Pages.Employé
 
         private void btn_AJouter(object sender, RoutedEventArgs e)
         {
+            string prenom = tbxPrenom.Text;
+            string nom = tbxNom.Text;
+            DateTime dateNaissance = dpNaissance.Date.DateTime;
+            string email = tbxEmail.Text;
+            string adresse = tbxAdresse.Text;
+            DateTime dateEmbauche = dpEmbauche.Date.DateTime;
+            double tauxHoraire = nbTauxHoraire.Value;
+            string statut = (cbStatut.SelectedItem as ComboBoxItem)?.Content?.ToString();
+            string photo = tbxPhoto.Text;
 
-      
+        
+            SingletonEmploye.getInstance().ajouterEmploye(
+                prenom, nom, dateNaissance, email, adresse,
+                dateEmbauche, tauxHoraire, photo, statut
+            );
 
+         
+            tbxPrenom.Text = "";
+            tbxNom.Text = "";
+            dpNaissance.Date = DateTimeOffset.Now;   // ou null si autorisé
+            tbxEmail.Text = "";
+            tbxAdresse.Text = "";
+            dpEmbauche.Date = DateTimeOffset.Now;   // ou null
+            nbTauxHoraire.Value = 0;
+            cbStatut.SelectedIndex = -1;
+            tbxPhoto.Text = "";
         }
+
     }
-}
+    }
+
+  

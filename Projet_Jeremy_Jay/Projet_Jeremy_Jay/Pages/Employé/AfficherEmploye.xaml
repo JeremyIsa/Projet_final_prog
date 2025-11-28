@@ -30,24 +30,105 @@
 
         <GridView x:Name="lvEmployes"
           Grid.Row="2"
-          ItemsSource="{x:Bind ListeEmploye}">
+          ItemsSource="{x:Bind ListeEmploye}"
+          IsItemClickEnabled="False"
+          SelectionMode="None">
+
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="Classes:Employe">
-                    <StackPanel Margin="10">
 
-                        <TextBlock Text="{x:Bind Prenom}" FontWeight="Bold" FontSize="18"/>
-                        <TextBlock Text="{x:Bind Nom}" FontSize="16"/>
+                    <Border Background="White"
+                    Padding="15"
+                    CornerRadius="12"
+                    Width="250"
+                    Margin="10"
+                    BorderBrush="#DDD"
+                    BorderThickness="1">
 
-                        <TextBlock Text="Informations :" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                        <StackPanel Spacing="10">
 
-                        <TextBlock Text="{x:Bind Email}" />
-                        <TextBlock Text="{x:Bind Adresse}" />
-                        <TextBlock Text="{x:Bind Date_naissance, Mode=OneWay}" />
-                        <TextBlock Text="{x:Bind Date_embauche, Mode=OneWay}" />
-                        <TextBlock Text="{x:Bind Taux_horaire}" />
-                        <TextBlock Text="{x:Bind Statut}" />
+                            <Grid HorizontalAlignment="Center">
+                                <Ellipse Width="90"
+                                 Height="90">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{x:Bind Photo}" Stretch="UniformToFill"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
 
-                    </StackPanel>
+
+                            <TextBlock Text="{x:Bind Prenom}"
+           FontSize="20"
+           FontWeight="Bold"
+           HorizontalAlignment="Center"/>
+
+                         
+                            <TextBlock Text="{x:Bind Nom}"
+           FontSize="18"
+           HorizontalAlignment="Center"/>
+
+                        
+                            <Rectangle Height="1" Fill="#DDD" Margin="0,5"/>
+
+                        
+                            <StackPanel Spacing="6">
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Matricule : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Matricule}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Date de naissance : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Date_naissance}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Email : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Email}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Adresse : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Adresse}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Date embauche : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Date_embauche}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Taux horaire : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Taux_horaire}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Statut : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Statut}"/>
+                                </StackPanel>
+
+                            </StackPanel>
+
+            
+                            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,10,0,0" HorizontalAlignment="Center">
+
+                                <Button Content="Modifier"
+                                Background="#0078D7"
+                                Foreground="White"
+                                Width="90"
+                             Click="Button_Modifier"/>
+
+                                <Button Content="Supprimer"
+                                Background="#D70000"
+                                Foreground="White"
+                                Width="90"
+                              Click="Button_Supprimer"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>

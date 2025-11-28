@@ -12,96 +12,84 @@ namespace Projet_Jeremy_Jay
 {
     class SingletonEmploye
     {
-
         string connectionString;
-        ObservableCollection<Classes.Employe> ListeEmploye;
+        ObservableCollection<Employe> ListeEmploye;
 
         static SingletonEmploye instance = null;
 
         private SingletonEmploye()
         {
-          
             connectionString = "Server=cours.cegep3r.info;Database=a2025_420335-345ri_greq2;Uid=2146340;Pwd=2146340;";
-
-          
-            ListeEmploye = new ObservableCollection<Classes.Employe>();
+            ListeEmploye = new ObservableCollection<Employe>();
         }
+
         public static SingletonEmploye getInstance()
         {
-
             if (instance == null)
                 instance = new SingletonEmploye();
-
-          
             return instance;
         }
 
-
-
-        public ObservableCollection<Classes.Employe> Liste
-        {
-            get => ListeEmploye;  
-        }
+        public ObservableCollection<Employe> Liste => ListeEmploye;
 
         public void getAllEmploye()
         {
-           
             ListeEmploye.Clear();
 
             try
             {
                 using MySqlConnection con = new MySqlConnection(connectionString);
-
-            
                 using MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM employe";   
+                cmd.CommandText = "SELECT * FROM employe";
 
-                con.Open();  
-              
+                con.Open();
+
                 using MySqlDataReader r = cmd.ExecuteReader();
 
-            
                 while (r.Read())
                 {
-                    
                     double taux_horaire = r.GetDouble("taux_horaire");
-                    DateTime date_naissance =r.GetDateTime("date_naissance");
+                    DateTime date_naissance = r.GetDateTime("date_naissance");
                     DateTime date_embauche = r.GetDateTime("date_embauche");
+
                     string matricule = r.GetString("matricule");
-                    string num_projet = r.GetString("num_projet");
                     string nom = r.GetString("nom");
                     string prenom = r.GetString("prenom");
                     string email = r.GetString("email");
                     string adresse = r.GetString("adresse");
-                    string photo_id = r.GetString("photo_id");
+                    string photo = r.GetString("photo");     // <<< corrigé
                     string statut = r.GetString("statut");
 
-                    
-                    Employe e = new Employe(matricule, num_projet , prenom, nom,date_naissance,email,adresse,date_embauche,taux_horaire,photo_id,statut);
-
-                  
+                    Employe e = new Employe(matricule, prenom, nom, date_naissance,
+                                            email, adresse, date_embauche,
+                                            taux_horaire, photo, statut); // <<< photo
                     ListeEmploye.Add(e);
                 }
             }
             catch (MySqlException ex)
             {
-           
                 Debug.WriteLine(ex.Message);
             }
         }
 
-
-        public void ajouterEmploye(string matricule, string num_projet, string prenom, string nom, DateTime date_naissance, string email, string adresse, DateTime date_embauche, double taux_horaire, string photo_id, string statut)
+        public void ajouterEmploye(string prenom, string nom,
+                            DateTime date_naissance, string email, string adresse,
+                            DateTime date_embauche, double taux_horaire,
+                            string photo, string statut)
         {
             using MySqlConnection con = new MySqlConnection(connectionString);
             using MySqlCommand cmd = new MySqlCommand();
             cmd.Connection = con;
 
-            cmd.CommandText = @"INSERT INTO employe (matricule, num_projet, prenom, nom, date_naissance, email, adresse, date_embauche, taux_horaire, photo_id, statut)
-                VALUES (NULL, @num_projet, @prenom, @nom, @date_naissance, @email,@adresse, @date_embauche, @taux_horaire, @photo_id, @statut)";
-
           
-            cmd.Parameters.AddWithValue("@num_projet", num_projet);
+            cmd.CommandText = @"
+        INSERT INTO employe (prenom, nom, date_naissance,
+                             email, adresse, date_embauche,
+                             taux_horaire, photo, statut)
+        VALUES (@prenom, @nom, @date_naissance,
+                @email, @adresse, @date_embauche,
+                @taux_horaire, @photo, @statut)";
+
             cmd.Parameters.AddWithValue("@prenom", prenom);
             cmd.Parameters.AddWithValue("@nom", nom);
             cmd.Parameters.AddWithValue("@date_naissance", date_naissance);
@@ -109,16 +97,30 @@ namespace Projet_Jeremy_Jay
             cmd.Parameters.AddWithValue("@adresse", adresse);
             cmd.Parameters.AddWithValue("@date_embauche", date_embauche);
             cmd.Parameters.AddWithValue("@taux_horaire", taux_horaire);
-            cmd.Parameters.AddWithValue("@photo_id", photo_id);
-            cmd.Parameters.AddWithValue("@status", statut);
+            cmd.Parameters.AddWithValue("@photo", photo);
+            cmd.Parameters.AddWithValue("@statut", statut);
 
             con.Open();
             cmd.ExecuteNonQuery();
 
            
-            getAllEmploye();
-        }
+            cmd.CommandText = @"
+        SELECT matricule 
+        FROM employe 
+        WHERE nom = @nom AND prenom = @prenom AND date_naissance = @date_naissance
+        ORDER BY matricule DESC
+        LIMIT 1";
 
+            string matriculeGenere = (string)cmd.ExecuteScalar();
+
+           
+            Employe e = new Employe(matriculeGenere, prenom, nom, date_naissance,
+                                    email, adresse, date_embauche,
+                                    taux_horaire, photo, statut);
+
+      
+            ListeEmploye.Add(e);
+        }
         public void SupprimerEmploye(string matricule)
         {
             try
@@ -133,7 +135,7 @@ namespace Projet_Jeremy_Jay
                 con.Open();
                 cmd.ExecuteNonQuery();
 
-                getAllEmploye(); 
+                getAllEmploye();
             }
             catch (MySqlException ex)
             {
@@ -141,10 +143,10 @@ namespace Projet_Jeremy_Jay
             }
         }
 
-        public void ModifierEmploye(string matricule, string num_projet, string prenom, string nom,
-                            DateTime date_naissance, string email, string adresse,
-                            DateTime date_embauche, double taux_horaire,
-                            string photo_id, string statut)
+        public void ModifierEmploye(string matricule, string prenom, string nom,
+                                    DateTime date_naissance, string email, string adresse,
+                                    DateTime date_embauche, double taux_horaire,
+                                    string photo, string statut)
         {
             try
             {
@@ -153,21 +155,19 @@ namespace Projet_Jeremy_Jay
                 cmd.Connection = con;
 
                 cmd.CommandText = @"
-            UPDATE employe
-            SET num_projet = @num_projet,
-                prenom = @prenom,
-                nom = @nom,
-                date_naissance = @date_naissance,
-                email = @email,
-                adresse = @adresse,
-                date_embauche = @date_embauche,
-                taux_horaire = @taux_horaire,
-                photo_id = @photo_id,
-                status = @statut
-            WHERE matricule = @matricule";
+                    UPDATE employe
+                    SET prenom = @prenom,
+                        nom = @nom,
+                        date_naissance = @date_naissance,
+                        email = @email,
+                        adresse = @adresse,
+                        date_embauche = @date_embauche,
+                        taux_horaire = @taux_horaire,
+                        photo = @photo,
+                        statut = @statut
+                    WHERE matricule = @matricule";
 
                 cmd.Parameters.AddWithValue("@matricule", matricule);
-                cmd.Parameters.AddWithValue("@num_projet", num_projet);
                 cmd.Parameters.AddWithValue("@prenom", prenom);
                 cmd.Parameters.AddWithValue("@nom", nom);
                 cmd.Parameters.AddWithValue("@date_naissance", date_naissance);
@@ -175,24 +175,19 @@ namespace Projet_Jeremy_Jay
                 cmd.Parameters.AddWithValue("@adresse", adresse);
                 cmd.Parameters.AddWithValue("@date_embauche", date_embauche);
                 cmd.Parameters.AddWithValue("@taux_horaire", taux_horaire);
-                cmd.Parameters.AddWithValue("@photo_id", photo_id);
+                cmd.Parameters.AddWithValue("@photo", photo);       // <<< corrigé
                 cmd.Parameters.AddWithValue("@statut", statut);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
 
-                getAllEmploye(); 
+                getAllEmploye();
             }
             catch (MySqlException ex)
             {
                 Debug.WriteLine("Erreur modification employé : " + ex.Message);
             }
         }
-
-
-
-
-
-
     }
 }
+
