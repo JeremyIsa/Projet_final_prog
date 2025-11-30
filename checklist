@@ -85,11 +85,11 @@ Adresse
 Num. de téléphone
 Email
 
-[  ] Afficher la liste des clients
-[  ] Ajouter un client
+[ x ] Afficher la liste des clients
+[ x ] Ajouter un client
 [  ] Modifier les infos du client
 
-[  ] Validation de données
+[ x ] Validation de données
 
 ---------------------------------------------------------------------------------------------------------
 
