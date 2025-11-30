@@ -8,7 +8,50 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <ScrollViewer>
+        <Grid Padding="30">
 
-    </Grid>
+            <Button x:Name="btnRetour"
+                    Content="⟵ Retour"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="0,0,0,15"
+                    Click="btnRetour_Click"
+                    Background="#DDDDDD"
+                    Foreground="Black"
+                    Padding="10,5" />
+
+            <StackPanel Width="450" HorizontalAlignment="Center" Spacing="5">
+
+                <TextBlock Text="Ajouter un client"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
+
+                <TextBox x:Name="tbxNom" Header="Nom" PlaceholderText="Ex: Mario Tremblay"/>
+                <TextBlock x:Name="errNom" Foreground="Red" FontSize="12"/>
+
+                <TextBox x:Name="tbxAdresse" Header="Adresse"
+                         PlaceholderText="Ex: 123 Rue Principale"/>
+                <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12"/>
+
+                <TextBox x:Name="tbxTelephone" Header="Téléphone"
+                         PlaceholderText="Ex: 123-456-7890"/>
+                <TextBlock x:Name="errTel" Foreground="Red" FontSize="12"/>
+
+                <TextBox x:Name="tbxEmail" Header="Email"
+                         PlaceholderText="Ex: client@gmail.com"/>
+                <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12"/>
+
+                <Button x:Name="btnAjouter"
+                        Content="Ajouter"
+                        Height="45"
+                        Background="#0078D7"
+                        Foreground="White"
+                        Click="btnAjouter_Click"/>
+            </StackPanel>
+
+        </Grid>
+    </ScrollViewer>
 </Page>

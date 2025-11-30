@@ -37,7 +37,7 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="Classes:Employe">
 
-                    <Border Background="White"
+                    <Border Background="LightBlue"
                     Padding="15"
                     CornerRadius="12"
                     Width="250"
@@ -45,7 +45,8 @@
                     BorderBrush="#DDD"
                     BorderThickness="1">
 
-                        <StackPanel Spacing="10">
+                        <StackPanel Spacing="10"
+                                    Background="LightBlue">
 
                             <Grid HorizontalAlignment="Center">
                                 <Ellipse Width="90"

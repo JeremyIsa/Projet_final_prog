@@ -40,8 +40,8 @@ namespace Projet_Jeremy_Jay
             try
             {
                 using MySqlConnection con = new MySqlConnection(connectionString);
-                using MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM client";
+                using MySqlCommand cmd = new MySqlCommand("liste_clients", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 con.Open();
 
@@ -66,7 +66,75 @@ namespace Projet_Jeremy_Jay
             }
         }
 
+        public void ajouterClient(string nom, string adresse, string num_tel, string email)
+        {
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand cmd = new MySqlCommand("ajout_client", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@i_nom", nom);
+                cmd.Parameters.AddWithValue("@i_adresse", adresse);
+                cmd.Parameters.AddWithValue("@i_telephone", num_tel);
+                cmd.Parameters.AddWithValue("@i_email", email);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+
+                cmd.Parameters.Clear();
+                cmd.CommandText = @"
+                    SELECT id_client 
+                    FROM client 
+                    WHERE nom = @nom AND telephone = @telephone 
+                    ORDER BY id_client DESC
+                    LIMIT 1";
+
+                cmd.Parameters.AddWithValue("@nom", nom);
+                cmd.Parameters.AddWithValue("@telephone", num_tel);
+
+                int id_client = Convert.ToInt32(cmd.ExecuteScalar());
+
+                Client c = new Client(id_client, nom, adresse, num_tel, email);
+
+                ListeClient.Add(c);
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void modifierClient(Client c)
+        {
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = @"
+                    UPDATE client
+                    SET nom = @nom, 
+                    adresse = @adresse, 
+                    telephone = @telephone, 
+                    email = @email 
+                    WHERE id_client = @id_client";
+
+                cmd.Parameters.AddWithValue("@nom", c.Nom);
+                cmd.Parameters.AddWithValue("@adresse", c.Adresse);
+                cmd.Parameters.AddWithValue("@telephone", c.Num_tel);
+                cmd.Parameters.AddWithValue("@email", c.Email);
+                cmd.Parameters.AddWithValue("@id_client", c.Id_client);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
 
 
+
+        }
     }
-}
+}   

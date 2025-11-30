@@ -53,11 +53,11 @@ namespace Projet_Jeremy_Jay.Pages.Employé
             string prenom = tbxPrenom.Text.Trim();
             string nom = tbxNom.Text.Trim();
             DateOnly date_naissance =
-        DateOnly.FromDateTime(dpNaissance.SelectedDate.Value.DateTime);
+            DateOnly.FromDateTime(dpNaissance.SelectedDate.Value.DateTime);
             string email = tbxEmail.Text.Trim();
             string adresse = tbxAdresse.Text.Trim();
             DateOnly date_Embauche =
-      DateOnly.FromDateTime(dpEmbauche.SelectedDate.Value.DateTime);
+            DateOnly.FromDateTime(dpEmbauche.SelectedDate.Value.DateTime);
             double tauxHoraire = nbTauxHoraire.Value;
             string statut = (cbStatut.SelectedItem as ComboBoxItem)?.Content?.ToString();
             string photo = tbxPhoto.Text.Trim();
