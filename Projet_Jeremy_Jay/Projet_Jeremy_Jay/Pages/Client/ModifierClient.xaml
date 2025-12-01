@@ -8,7 +8,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Margin="20">
+        <StackPanel Width="450" HorizontalAlignment="Center" Spacing="5">
 
+            <TextBlock Text="Modifier un client"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <TextBox x:Name="tbxNom" Header="Nom"/>
+            <TextBlock x:Name="errNom" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxTelephone" Header="Téléphone" PlaceholderText="Ex: 123-456-7890"/>
+            <TextBlock x:Name="errTel" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxEmail" Header="Email" PlaceholderText="Ex: jean@gmail.com"/>
+            <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12"/>
+
+            <TextBox x:Name="tbxAdresse" Header="Adresse" PlaceholderText="Ex: 123 Rue Principale"/>
+            <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12"/>
+
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,20,0,0">
+                <Button x:Name="btnSave" Content="Sauvegarder" Background="LightGreen" Click="btnSave_Click"/>
+                <Button x:Name="btnCancel" Content="Annuler" Background="LightGray" Click="btnCancel_Click"/>
+            </StackPanel>
+
+        </StackPanel>
     </Grid>
 </Page>

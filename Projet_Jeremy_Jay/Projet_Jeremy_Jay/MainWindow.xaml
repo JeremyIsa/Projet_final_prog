@@ -39,8 +39,8 @@
             
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Clients" x:Name="iClients" Icon="People" Tag="clients"/>
-                <NavigationViewItem Content="Employé" x:Name="iEmploye" Icon="AddFriend" Tag="employe"/>
-                <NavigationViewItem Content="Projet" x:Name="iProjet" Icon="Shop" Tag="projet"/>
+                <NavigationViewItem Content="Employés" x:Name="iEmploye" Icon="AddFriend" Tag="employe"/>
+                <NavigationViewItem Content="Projets" x:Name="iProjet" Icon="Shop" Tag="projet"/>
                 
                 <NavigationViewItemSeparator />
 

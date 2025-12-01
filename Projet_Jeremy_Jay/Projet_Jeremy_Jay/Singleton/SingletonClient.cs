@@ -110,21 +110,15 @@ namespace Projet_Jeremy_Jay
             try
             {
                 using MySqlConnection con = new MySqlConnection(connectionString);
-                using MySqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = @"
-                    UPDATE client
-                    SET nom = @nom, 
-                    adresse = @adresse, 
-                    telephone = @telephone, 
-                    email = @email 
-                    WHERE id_client = @id_client";
+                using MySqlCommand cmd = new MySqlCommand("modifier_client", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@nom", c.Nom);
                 cmd.Parameters.AddWithValue("@adresse", c.Adresse);
                 cmd.Parameters.AddWithValue("@telephone", c.Num_tel);
                 cmd.Parameters.AddWithValue("@email", c.Email);
                 cmd.Parameters.AddWithValue("@id_client", c.Id_client);
+
                 con.Open();
                 cmd.ExecuteNonQuery();
             }

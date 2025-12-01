@@ -51,9 +51,9 @@ namespace Projet_Jeremy_Jay.Pages.Client
         private void btnModifier_Click(object sender, RoutedEventArgs e)
         {
             var bouton = sender as Button;
-            var employe = bouton.DataContext as Classes.Client;
+            var client = bouton.DataContext as Classes.Client;
 
-            Frame.Navigate(typeof(ModifierClient));
+            Frame.Navigate(typeof(ModifierClient), client);
         }
     }
 }
