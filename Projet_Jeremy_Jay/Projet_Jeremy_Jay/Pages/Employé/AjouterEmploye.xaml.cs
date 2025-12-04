@@ -13,6 +13,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -135,8 +136,17 @@ namespace Projet_Jeremy_Jay.Pages.Employé
                date_Embauche, tauxHoraire, photo, statut
             );
 
-         
-            tbxPrenom.Text = "";
+
+                infoSuccess.IsOpen = true;
+
+              
+                var _ = Task.Delay(3000).ContinueWith(_ =>
+                {
+                    DispatcherQueue.TryEnqueue(() => infoSuccess.IsOpen = false);
+                });
+
+
+                tbxPrenom.Text = "";
             tbxNom.Text = "";
             dpNaissance.Date = DateTimeOffset.Now;   
             tbxEmail.Text = "";

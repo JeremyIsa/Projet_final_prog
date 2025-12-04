@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -160,6 +161,14 @@ namespace Projet_Jeremy_Jay.Pages.Employé
         {
             if (!ValiderChamps())
                 return;
+            infoSuccess.IsOpen = true;
+
+
+            var _ = Task.Delay(3000).ContinueWith(_ =>
+            {
+                DispatcherQueue.TryEnqueue(() => infoSuccess.IsOpen = false);
+            });
+
 
             SingletonEmploye.getInstance().ModifierEmploye(
                 employeSelectionne.Matricule,

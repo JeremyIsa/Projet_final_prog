@@ -8,10 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-
-
     <ScrollViewer>
         <Grid Padding="30">
+
             <Button Content="⟵ Retour"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -19,39 +18,52 @@
                     Click="Button_Retour"
                     Background="#DDDDDD"
                     Foreground="Black"
-                    Padding="10,5"
-                    />
+                    Padding="10,5"/>
 
             <StackPanel Width="450" HorizontalAlignment="Center" Spacing="5">
+
+               
+                <InfoBar x:Name="infoSuccess"
+                         IsOpen="False"
+                         Severity="Success"
+                         Title="Succès"
+                         Message="L'employé a été ajouté avec succès!"
+                         Margin="0,0,0,15"/>
 
                 <TextBlock Text="Ajouter un employé"
                            FontSize="28"
                            FontWeight="Bold"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,20"/>
-                
+
                 <TextBox x:Name="tbxPrenom" Header="Prénom" PlaceholderText="Ex: Jean"/>
                 <TextBlock x:Name="errPrenom" Foreground="Red" FontSize="12"/>
+
                 <TextBox x:Name="tbxNom" Header="Nom" PlaceholderText="Ex: Tremblay"/>
                 <TextBlock x:Name="errNom" Foreground="Red" FontSize="12"/>
+
                 <DatePicker x:Name="dpNaissance" Header="Date de naissance"/>
 
                 <TextBox x:Name="tbxEmail" Header="Email" PlaceholderText="Ex: jean@gmail.com"/>
                 <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12"/>
+
                 <TextBox x:Name="tbxAdresse" Header="Adresse" PlaceholderText="Ex: 123 Rue Principale"/>
                 <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12"/>
+
                 <DatePicker x:Name="dpEmbauche" Header="Date d'embauche"/>
 
                 <NumberBox x:Name="nbTauxHoraire" Header="Taux horaire ($/h)" PlaceholderText="Ex: 22.50"/>
                 <TextBlock x:Name="errTaux" Foreground="Red" FontSize="12"/>
+
                 <ComboBox x:Name="cbStatut" Header="Statut" PlaceholderText="Choisir">
                     <ComboBoxItem Content="journalier"/>
                     <ComboBoxItem Content="permanent"/>
                 </ComboBox>
                 <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12"/>
 
-                <TextBox x:Name="tbxPhoto" Header="Photo ID" PlaceholderText="Ex: photo123.jpg"/>
+                <TextBox x:Name="tbxPhoto" Header="Photo ID" PlaceholderText="Ex: https://site.com/photo.jpg"/>
                 <TextBlock x:Name="errPhoto" Foreground="Red" FontSize="12"/>
+
                 <Button Content="Ajouter"
                         Height="45"
                         Background="#0078D7"
