@@ -39,54 +39,38 @@ namespace Projet_Jeremy_Jay.Pages.Employé
 
         private void btn_AJouter(object sender, RoutedEventArgs e)
         {
+            bool valide = true;
 
-            bool valide = true; 
-
-       
             errPrenom.Text = "";
             errNom.Text = "";
             errEmail.Text = "";
             errAdresse.Text = "";
             errTaux.Text = "";
             errPhoto.Text = "";
-
+            errDateNaissance.Text = "";
+            errDateEmbauche.Text = "";
+            errStatut.Text = "";
 
             string prenom = tbxPrenom.Text.Trim();
             string nom = tbxNom.Text.Trim();
-            DateOnly date_naissance =
-            DateOnly.FromDateTime(dpNaissance.SelectedDate.Value.DateTime);
             string email = tbxEmail.Text.Trim();
             string adresse = tbxAdresse.Text.Trim();
-            DateOnly date_Embauche =
-            DateOnly.FromDateTime(dpEmbauche.SelectedDate.Value.DateTime);
+            string photo = tbxPhoto.Text.Trim();
             double tauxHoraire = nbTauxHoraire.Value;
             string statut = (cbStatut.SelectedItem as ComboBoxItem)?.Content?.ToString();
-            string photo = tbxPhoto.Text.Trim();
 
-
-            
-            if (string.IsNullOrWhiteSpace(nom))
-            {
-                errNom.Text = "Veuillez entrer un nom.";
-                valide = false;
-            }
-            else if (nom.Length < 3 || nom.Length > 100)
-            {
-                errNom.Text = "Le nom doit avoir entre 3 et 100 caractères.";
-                valide = false;
-            }
             if (string.IsNullOrWhiteSpace(prenom))
             {
                 errPrenom.Text = "Veuillez entrer un prénom.";
                 valide = false;
             }
-            else if (nom.Length < 3 || nom.Length > 100)
+            if (string.IsNullOrWhiteSpace(nom))
             {
-                errPrenom.Text = "Le prénom doit avoir entre 3 et 100 caractères.";
+                errNom.Text = "Veuillez entrer un nom.";
                 valide = false;
             }
 
-
+    
             if (string.IsNullOrWhiteSpace(email))
             {
                 errEmail.Text = "Veuillez entrer un email.";
@@ -98,17 +82,16 @@ namespace Projet_Jeremy_Jay.Pages.Employé
                 valide = false;
             }
 
+          
             if (string.IsNullOrWhiteSpace(statut))
             {
                 errStatut.Text = "Veuillez sélectionner une catégorie.";
                 valide = false;
             }
 
-           
-      
             if (string.IsNullOrWhiteSpace(photo))
             {
-                errPhoto.Text = "Veuillez entrer une l'url d'un photo.";
+                errPhoto.Text = "Veuillez entrer une URL.";
                 valide = false;
             }
             else if (!Uri.IsWellFormedUriString(photo, UriKind.Absolute))
@@ -117,55 +100,83 @@ namespace Projet_Jeremy_Jay.Pages.Employé
                 valide = false;
             }
 
-
             if (double.IsNaN(tauxHoraire))
             {
-                errTaux.Text = "Veuillez entrer un taux horraire comme 19,99.";
+                errTaux.Text = "Veuillez entrer un taux horaire valide.";
                 valide = false;
             }
 
-
-
-
-            if (valide)
+          
+            if (dpNaissance.SelectedDate == null)
             {
+                errDateNaissance.Text = "Veuillez choisir une date de naissance.";
+                valide = false;
+            }
+            if (dpEmbauche.SelectedDate == null)
+            {
+                errDateEmbauche.Text = "Veuillez choisir une date d'embauche.";
+                valide = false;
+            }
 
+            DateOnly date_naissance = default;
+            DateOnly date_embauche = default;
 
-                SingletonEmploye.getInstance().ajouterEmploye(
+            if (dpNaissance.SelectedDate != null)
+                date_naissance = DateOnly.FromDateTime(dpNaissance.SelectedDate.Value.DateTime);
+            if (dpEmbauche.SelectedDate != null)
+                date_embauche = DateOnly.FromDateTime(dpEmbauche.SelectedDate.Value.DateTime);
+
+         
+            if (dpNaissance.SelectedDate != null && dpEmbauche.SelectedDate != null)
+            {
+                DateTime d1 = date_naissance.ToDateTime(new TimeOnly(0, 0));
+                DateTime d2 = date_embauche.ToDateTime(new TimeOnly(0, 0));
+                double ageEnAnnees = (d2 - d1).TotalDays / 365.25;
+
+                if (ageEnAnnees < 18)
+                {
+                    errDateNaissance.Text = "L'employé doit avoir au moins 18 ans.";
+                    valide = false;
+                }
+                else if (ageEnAnnees > 65)
+                {
+                    errDateNaissance.Text = "L'employé ne peut pas avoir plus de 65 ans.";
+                    valide = false;
+                }
+            }
+
+            if (!valide) return;
+
+            
+            SingletonEmploye.getInstance().ajouterEmploye(
                 prenom, nom, date_naissance, email, adresse,
-               date_Embauche, tauxHoraire, photo, statut
+                date_embauche, tauxHoraire, photo, statut
             );
 
+        
+            infoSuccess.IsOpen = true;
+            var _ = Task.Delay(3000).ContinueWith(_ =>
+            {
+                DispatcherQueue.TryEnqueue(() => infoSuccess.IsOpen = false);
+            });
 
-                infoSuccess.IsOpen = true;
-
-              
-                var _ = Task.Delay(3000).ContinueWith(_ =>
-                {
-                    DispatcherQueue.TryEnqueue(() => infoSuccess.IsOpen = false);
-                });
-
-
-                tbxPrenom.Text = "";
+  
+            tbxPrenom.Text = "";
             tbxNom.Text = "";
-            dpNaissance.Date = DateTimeOffset.Now;   
             tbxEmail.Text = "";
             tbxAdresse.Text = "";
-            dpEmbauche.Date = DateTimeOffset.Now;   
+            dpNaissance.Date = DateTimeOffset.Now;
+            dpEmbauche.Date = DateTimeOffset.Now;
             nbTauxHoraire.Value = 0;
             cbStatut.SelectedIndex = -1;
             tbxPhoto.Text = "";
         }
-
-    }
 
         private void Button_Retour(object sender, RoutedEventArgs e)
         {
             Frame.GoBack();
         }
     }
-
-
-
 }
+
 
