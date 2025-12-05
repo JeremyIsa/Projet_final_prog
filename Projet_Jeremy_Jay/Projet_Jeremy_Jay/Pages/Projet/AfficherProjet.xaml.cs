@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,9 +24,32 @@ namespace Projet_Jeremy_Jay.Pages.Projet
     /// </summary>
     public sealed partial class AfficherProjet : Page
     {
+
+        public ObservableCollection<Classes.Projet> ListeProjet { get; set; }
+
         public AfficherProjet()
         {
             InitializeComponent();
+            ListeProjet = new ObservableCollection<Classes.Projet>();
+            ChargerProjet();
+        }
+
+        private void ChargerProjet()
+        {
+            SingletonProjet.getInstance().getAllProjet();
+            ListeProjet.Clear();
+            foreach (var m in SingletonProjet.getInstance().Liste)
+                ListeProjet.Add(m);
+        }
+
+        private void btnModifierProjet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAjouterProjet_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

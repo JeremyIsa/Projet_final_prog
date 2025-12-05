@@ -5,10 +5,126 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Projet_Jeremy_Jay.Pages.Projet"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Classes="using:Projet_Jeremy_Jay.Classes"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Padding="20" RowDefinitions="Auto,Auto,*">
+
+        <!-- TITRE -->
+        <TextBlock Text="Liste des Projets"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Margin="0,0,0,20"
+                   HorizontalAlignment="Center"/>
+
+        <!-- BOUTON AJOUTER -->
+        <Button x:Name="btnAjouterProjet"
+                Content="Ajouter un projet"
+                Grid.Row="1"
+                Width="200"
+                Height="40"
+                HorizontalAlignment="Center"
+                Background="#0078D7"
+                Foreground="White"
+                Click="btnAjouterProjet_Click"/>
+
+        <!-- LISTE DES PROJETS -->
+        <GridView x:Name="lvProjets"
+                  Grid.Row="2"
+                  ItemsSource="{x:Bind ListeProjet}"
+                  IsItemClickEnabled="False"
+                  SelectionMode="None">
+
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="Classes:Projet">
+
+                    <Border Background="LightBlue"
+                            Padding="15"
+                            CornerRadius="12"
+                            Width="300"
+                            Margin="10"
+                            BorderBrush="#DDD"
+                            BorderThickness="1">
+
+                        <StackPanel Spacing="10"
+                                    Background="LightBlue">
+
+                            <!-- TITRE DU PROJET -->
+                            <TextBlock Text="{x:Bind Titre}"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"/>
+
+                            <!-- INFOS DU PROJET -->
+                            <StackPanel Spacing="6">
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Numéro : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Num_projet}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Date début : " FontWeight="Bold"/>
+                                    <!-- Plus de converter ici -->
+                                    <TextBlock Text="{x:Bind Date_debut}"/>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <TextBlock Text="Description :" FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Description}"
+                                               TextWrapping="Wrap"
+                                               MaxWidth="260"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Budget : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Budget}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Total salaires : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Total_salaire}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Nb employés : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Nb_employe}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Client : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Id_client}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Statut : " FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind Statut}"/>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                            <!-- BOUTON MODIFIER -->
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="10"
+                                        Margin="0,10,0,0"
+                                        HorizontalAlignment="Center">
+
+                                <Button x:Name="btnModifierProjet"
+                                        Content="Modifier"
+                                        Background="#0078D7"
+                                        Foreground="White"
+                                        Width="90"
+                                        Click="btnModifierProjet_Click"/>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
 
     </Grid>
 </Page>
