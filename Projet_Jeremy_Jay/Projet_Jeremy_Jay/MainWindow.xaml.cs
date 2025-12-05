@@ -9,6 +9,7 @@ using Projet_Jeremy_Jay.Pages.Client;
 using Projet_Jeremy_Jay.Pages.Connexion;
 using Projet_Jeremy_Jay.Pages.Employé;
 using Projet_Jeremy_Jay.Pages.Projet;
+using Projet_Jeremy_Jay.Singleton;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -73,6 +74,14 @@ namespace Projet_Jeremy_Jay
                         mainFrame.Navigate(typeof(PageConnexion));
                         break;
 
+                    case "deconnexion":
+                        SingletonAdmin.getInstance().Deconnecter();
+                        mainFrame.Navigate(typeof(AfficherEmploye));
+                        break;
+
+
+
+
                     default:
                         break;
 
@@ -88,5 +97,9 @@ namespace Projet_Jeremy_Jay
             if (mainFrame.CanGoBack)
                 mainFrame.GoBack();
         }
+
+
+     
+
     }
 }
