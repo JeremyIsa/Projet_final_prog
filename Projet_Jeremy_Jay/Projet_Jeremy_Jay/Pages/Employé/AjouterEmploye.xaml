@@ -43,6 +43,7 @@
                 <TextBlock x:Name="errNom" Foreground="Red" FontSize="12"/>
 
                 <DatePicker x:Name="dpNaissance" Header="Date de naissance"/>
+                <TextBlock x:Name="errDateNaissance" Foreground="Red" FontSize="12"/>
 
                 <TextBox x:Name="tbxEmail" Header="Email" PlaceholderText="Ex: jean@gmail.com"/>
                 <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12"/>
@@ -51,6 +52,7 @@
                 <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12"/>
 
                 <DatePicker x:Name="dpEmbauche" Header="Date d'embauche"/>
+                <TextBlock x:Name="errDateEmbauche" Foreground="Red" FontSize="12"/>
 
                 <NumberBox x:Name="nbTauxHoraire" Header="Taux horaire ($/h)" PlaceholderText="Ex: 22.50"/>
                 <TextBlock x:Name="errTaux" Foreground="Red" FontSize="12"/>
