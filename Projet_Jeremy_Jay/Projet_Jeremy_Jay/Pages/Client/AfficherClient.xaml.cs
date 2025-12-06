@@ -32,6 +32,8 @@ namespace Projet_Jeremy_Jay.Pages.Client
         {
             InitializeComponent();
             ListeClient = new ObservableCollection<Classes.Client>();
+            btnAjouter.IsEnabled = Singleton.SingletonAdmin.getInstance().EstAdminConnecte();
+
             ChargerClient();
         }
 
@@ -48,8 +50,26 @@ namespace Projet_Jeremy_Jay.Pages.Client
             Frame.Navigate(typeof(AjouterClient));
         }
 
-        private void btnModifier_Click(object sender, RoutedEventArgs e)
+        private async  void btnModifier_Click(object sender, RoutedEventArgs e)
         {
+
+
+            if (!Singleton.SingletonAdmin.getInstance().EstAdminConnecte())
+            {
+                ContentDialog dialog = new ContentDialog
+                {
+                    Title = "Accès refusé",
+                    Content = "Vous devez être connecté en tant qu'administrateur pour modifier un client.",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.XamlRoot
+                };
+
+                await dialog.ShowAsync();
+                return;
+            }
+
+
+
             var bouton = sender as Button;
             var client = bouton.DataContext as Classes.Client;
 

@@ -34,7 +34,8 @@ namespace Projet_Jeremy_Jay.Pages.Employé
             InitializeComponent();
 
             ListeEmploye = new ObservableCollection<Classes.Employe>();
-
+            btnAjouter.IsEnabled = Singleton.SingletonAdmin.getInstance().EstAdminConnecte();
+         
 
             ChargerEmploye();
         
@@ -51,8 +52,24 @@ namespace Projet_Jeremy_Jay.Pages.Employé
         }
 
      
-            private void Button_Modifier(object sender, RoutedEventArgs e)
+            private async void Button_Modifier(object sender, RoutedEventArgs e)
         {
+
+            if (!Singleton.SingletonAdmin.getInstance().EstAdminConnecte())
+            {
+                ContentDialog dialog = new ContentDialog
+                {
+                    Title = "Accès refusé",
+                    Content = "Vous devez être connecté en tant qu'administrateur pour modifier un employé.",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.XamlRoot
+                };
+
+                await dialog.ShowAsync();
+                return;
+            }
+
+       
             var bouton = sender as Button;
             var employe = bouton.DataContext as Employe;
 
@@ -64,11 +81,14 @@ namespace Projet_Jeremy_Jay.Pages.Employé
 
 
 
-        private void btnRedirection_Click(object sender, RoutedEventArgs e)
+        private async void btnRedirection_Click(object sender, RoutedEventArgs e)
         {
+            
             Frame.Navigate(typeof(AjouterEmploye));
         }
 
-      
     }
+
+
 }
+

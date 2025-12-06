@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Jeremy_Jay.Pages.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,6 +32,9 @@ namespace Projet_Jeremy_Jay.Pages.Projet
         {
             InitializeComponent();
             ListeProjet = new ObservableCollection<Classes.Projet>();
+            btnAjouterProjet.IsEnabled = Singleton.SingletonAdmin.getInstance().EstAdminConnecte();
+
+
             ChargerProjet();
         }
 
@@ -42,8 +46,29 @@ namespace Projet_Jeremy_Jay.Pages.Projet
                 ListeProjet.Add(m);
         }
 
-        private void btnModifierProjet_Click(object sender, RoutedEventArgs e)
+        private async void btnModifierProjet_Click(object sender, RoutedEventArgs e)
         {
+
+
+            if (!Singleton.SingletonAdmin.getInstance().EstAdminConnecte())
+            {
+                ContentDialog dialog = new ContentDialog
+                {
+                    Title = "Accès refusé",
+                    Content = "Vous devez être connecté en tant qu'administrateur pour modifier un projet.",
+                    CloseButtonText = "OK",
+                    XamlRoot = this.XamlRoot
+                };
+
+                await dialog.ShowAsync();
+                return;
+            }
+
+            var bouton = sender as Button;
+            var projet = bouton.DataContext as Classes.Projet;
+
+            Frame.Navigate(typeof(ModifierProjet), projet);
+
 
         }
 
