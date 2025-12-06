@@ -46,7 +46,9 @@ namespace Projet_Jeremy_Jay.Classes
         public string Photo { get => photo; set => photo = value; }  
         public string Statut { get => statut; set => statut = value; }
 
-public override string? ToString()
+        public bool EstOccupe { get; set; } = false;
+
+        public override string? ToString()
         {
             return base.ToString();
 }

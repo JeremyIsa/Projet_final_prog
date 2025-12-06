@@ -13,7 +13,7 @@ namespace Projet_Jeremy_Jay
     {
 
         string connectionString;
-        ObservableCollection<Projet> ListeProjet;
+        public ObservableCollection<Projet> ListeProjet;
 
         static SingletonProjet instance = null;
 
@@ -67,6 +67,67 @@ namespace Projet_Jeremy_Jay
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public void ajouterEmployeAuProjet(string matriculeEmploye, string numProjet, double heuresTravaillees, double salaire)
+        {
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand cmd = new MySqlCommand("ajout_employe_projet", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@i_matricule", matriculeEmploye);
+                cmd.Parameters.AddWithValue("@i_numero_projet", numProjet);
+                cmd.Parameters.AddWithValue("@i_heures_travailles", heuresTravaillees);
+                cmd.Parameters.AddWithValue("@i_salaire", salaire);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erreur lors de l'assignation : {ex.Message}");
+            }
+        }
+
+        public List<Projet> obtenirProjetsPourEmploye(string matricule)
+        {
+            List<Projet> projets = new List<Projet>();
+
+            try
+            {
+                using MySqlConnection con = new MySqlConnection(connectionString);
+                using MySqlCommand cmd = new MySqlCommand("SELECT p.* FROM Projet p INNER JOIN Employe_Projet ep ON p.numero_projet = ep.numero_projet WHERE ep.matricule = @matricule", con);
+
+                cmd.Parameters.AddWithValue("@matricule", matricule);
+
+                con.Open();
+
+                using MySqlDataReader r = cmd.ExecuteReader();
+
+                while (r.Read())
+                {
+                    string num_projet = r.GetString("numero_projet");
+                    string titre = r.GetString("titre");
+                    DateTime date_debut = r.GetDateTime("date_debut");
+                    string description = r.GetString("description");
+                    double budget = r.GetDouble("budget");
+                    int nb_employe = r.GetInt32("nb_employes_requis");
+                    double total_salaire = r.GetDouble("total_salaires");
+                    int id_client = r.GetInt32("id_client");
+                    string statut = r.GetString("statut");
+
+                    Projet p = new Projet(num_projet, titre, date_debut, description, budget, nb_employe, total_salaire, id_client, statut);
+                    projets.Add(p);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la récupération des projets : {ex.Message}");
+            }
+
+            return projets;
         }
     }
 }

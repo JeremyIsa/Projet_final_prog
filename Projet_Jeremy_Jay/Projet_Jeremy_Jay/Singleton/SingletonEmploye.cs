@@ -15,7 +15,7 @@ namespace Projet_Jeremy_Jay
     class SingletonEmploye
     {
         string connectionString;
-        ObservableCollection<Employe> ListeEmploye;
+        public ObservableCollection<Employe> ListeEmploye;
 
         static SingletonEmploye instance = null;
 

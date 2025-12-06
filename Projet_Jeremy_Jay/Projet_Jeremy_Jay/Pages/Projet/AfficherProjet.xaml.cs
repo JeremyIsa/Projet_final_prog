@@ -49,7 +49,7 @@ namespace Projet_Jeremy_Jay.Pages.Projet
 
         private void btnAjouterProjet_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(AjouterProjet));
         }
     }
 }
