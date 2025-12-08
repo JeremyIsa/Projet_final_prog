@@ -45,8 +45,8 @@ namespace Projet_Jeremy_Jay.Pages.Projet
                
                 cbClients.ItemsSource = SingletonClient.getInstance().Liste;
 
-                cbClients.DisplayMemberPath = "Nom";
-                cbClients.SelectedValuePath = "Identifiant";
+                cbClients.DisplayMemberPath = "Nom"; 
+                cbClients.SelectedValuePath = "Id_client";
             }
             catch (Exception ex)
             {
