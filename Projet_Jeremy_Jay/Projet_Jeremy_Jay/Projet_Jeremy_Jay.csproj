@@ -31,7 +31,7 @@
     <None Remove="Pages\Employé\AjouterEmploye.xaml" />
     <None Remove="Pages\Employé\ModifierEmploye.xaml" />
     <None Remove="Pages\Projet\AfficherProjet.xaml" />
-    <None Remove="Pages\Projet\AjouterProjet.xaml" />
+    <None Remove="Pages\Projet\CreeProjet.xaml" />
     <None Remove="Pages\Projet\ModifierProjet.xaml" />
   </ItemGroup>
 
@@ -114,6 +114,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\Projet\ModifierProjet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Projet\CreeProjet.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

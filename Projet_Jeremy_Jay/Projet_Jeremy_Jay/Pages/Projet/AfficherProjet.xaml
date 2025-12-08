@@ -19,14 +19,24 @@
 
         <!-- BOUTON AJOUTER -->
         <Button x:Name="btnAjouterProjet"
-                Content="Ajouter un projet"
+                Content="Assigner un employer"
                 Grid.Row="1"
                 Width="200"
                 Height="40"
                 HorizontalAlignment="Center"
                 Background="#0078D7"
                 Foreground="White"
-                Click="btnAjouterProjet_Click"/>
+                Click="btnAssignerProjet_Click"/>
+        <!-- BOUTON AJOUTER -->
+        <Button x:Name="btnCreeProjet"
+            Content="Créé un nouveau projet"
+            Grid.Row="1"
+            Width="200"
+            Height="40"
+            HorizontalAlignment="Right"
+            Background="#0078D7"
+            Foreground="White"
+            Click="btnCreeProjet_Click"/>
 
         <!-- LISTE DES PROJETS -->
         <GridView x:Name="lvProjets"

@@ -129,5 +129,83 @@ namespace Projet_Jeremy_Jay
 
             return projets;
         }
+
+
+        public bool AjouterProjet(Projet projet)
+        {
+            try
+            {
+                using MySqlConnection conn = new MySqlConnection(connectionString);
+                {
+                    conn.Open();
+
+                
+                    string sql = @"
+                        INSERT INTO projet (id_client, date_debut, titre, description, budget, nb_employes_requis, total_salaires, statut)
+                        VALUES (@id_client, @date_debut, @titre, @description, @budget, @nb_employe, @total_salaire, @statut);
+                    ";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@id_client", projet.Id_client);
+                    cmd.Parameters.AddWithValue("@date_debut", projet.Date_debut);
+                    cmd.Parameters.AddWithValue("@titre", projet.Titre);
+                    cmd.Parameters.AddWithValue("@description", projet.Description);
+                    cmd.Parameters.AddWithValue("@budget", projet.Budget);
+                    cmd.Parameters.AddWithValue("@nb_employe", projet.Nb_employe);
+                    cmd.Parameters.AddWithValue("@total_salaire", projet.Total_salaire);
+                    cmd.Parameters.AddWithValue("@statut", projet.Statut);
+
+                    cmd.ExecuteNonQuery();
+
+                    string num = RecupererNumeroProjet((int)cmd.LastInsertedId);
+
+                    projet.Num_projet = num;
+                    ListeProjet.Add(projet);
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur AjouterProjet : " + ex.Message);
+                return false;
+            }
+        }
+
+       
+        private string RecupererNumeroProjet(int idProjet)
+        {
+            try
+            {
+                using MySqlConnection conn = new MySqlConnection(connectionString);
+                {
+                    conn.Open();
+
+                    MySqlCommand cmd = new MySqlCommand(
+                        "SELECT numero_projet FROM projet WHERE id_projet = @id",
+                        conn);
+
+                    cmd.Parameters.AddWithValue("@id", idProjet);
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                        return result.ToString();
+                }
+            }
+            catch { }
+
+            return "";
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+

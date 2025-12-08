@@ -33,7 +33,7 @@ namespace Projet_Jeremy_Jay.Pages.Projet
             InitializeComponent();
             ListeProjet = new ObservableCollection<Classes.Projet>();
             btnAjouterProjet.IsEnabled = Singleton.SingletonAdmin.getInstance().EstAdminConnecte();
-
+            btnCreeProjet.IsEnabled = Singleton.SingletonAdmin.getInstance().EstAdminConnecte();
 
             ChargerProjet();
         }
@@ -72,9 +72,15 @@ namespace Projet_Jeremy_Jay.Pages.Projet
 
         }
 
-        private void btnAjouterProjet_Click(object sender, RoutedEventArgs e)
+        private void btnAssignerProjet_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AjouterProjet));
+        }
+
+        private void btnCreeProjet_Click(object sender, RoutedEventArgs e)
+        {
+
+            Frame.Navigate(typeof(CreeProjet));
         }
     }
 }

@@ -31,73 +31,128 @@ namespace Projet_Jeremy_Jay.Singleton
             return instance;
         }
 
-    
+   
         public bool CreerAdmin(string nomUtilisateur, string motDePasse)
         {
-            if (string.IsNullOrWhiteSpace(nomUtilisateur) || string.IsNullOrWhiteSpace(motDePasse))
-                return false;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(nomUtilisateur) || string.IsNullOrWhiteSpace(motDePasse))
+                    return false;
 
-            using MySqlConnection con = new(ConnectionString);
-            con.Open();
+                using MySqlConnection con = new(ConnectionString);
+                con.Open();
 
            
-            using MySqlCommand checkCmd = new("SELECT COUNT(*) FROM utilisateur WHERE nomUtilisateur=@u", con);
-            checkCmd.Parameters.AddWithValue("@u", nomUtilisateur);
-            int count = Convert.ToInt32(checkCmd.ExecuteScalar());
-            if (count > 0)
-                return false;
+                using MySqlCommand checkCmd = new("SELECT COUNT(*) FROM utilisateur WHERE nomUtilisateur=@u", con);
+                checkCmd.Parameters.AddWithValue("@u", nomUtilisateur);
 
-        
-            string hashPass = HashMotDePasse(motDePasse);
+                int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+                if (count > 0)
+                    return false;
 
-   
-            using MySqlCommand cmd = new(
-                "INSERT INTO utilisateur (nomUtilisateur, motDePasse, estAdmin) VALUES (@u, @p, 1)", con);
-            cmd.Parameters.AddWithValue("@u", nomUtilisateur);
-            cmd.Parameters.AddWithValue("@p", hashPass);
-            cmd.ExecuteNonQuery();
+                string hashPass = HashMotDePasse(motDePasse);
 
-            return true;
-        }
+                using MySqlCommand cmd = new(
+                    "INSERT INTO utilisateur (nomUtilisateur, motDePasse, estAdmin) VALUES (@u, @p, 1)", con);
+                cmd.Parameters.AddWithValue("@u", nomUtilisateur);
+                cmd.Parameters.AddWithValue("@p", hashPass);
 
-        private string HashMotDePasse(string motDePasse)
-        {
-            using SHA256 sha = SHA256.Create();
-            byte[] bytes = sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(motDePasse));
-            return Convert.ToHexString(bytes);
-        }
+                cmd.ExecuteNonQuery();
 
-    
-        public bool Connecter(string nomUtilisateur, string motDePasse)
-        {
-            string hashPass = HashMotDePasse(motDePasse);
-
-            using MySqlConnection con = new(ConnectionString);
-            con.Open();
-
-            using MySqlCommand cmd = new(
-                "SELECT * FROM utilisateur WHERE nomUtilisateur=@u AND motDePasse=@p AND estAdmin=1", con);
-            cmd.Parameters.AddWithValue("@u", nomUtilisateur);
-            cmd.Parameters.AddWithValue("@p", hashPass);
-
-            using var reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                AdminConnecte = new Admin(nomUtilisateur, motDePasse, true);
                 return true;
             }
-            return false;
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Erreur MySQL lors de la création de l'admin : " + ex.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur inattendue lors de la création de l'admin : " + ex.Message);
+                return false;
+            }
         }
 
-        
+  
+        private string HashMotDePasse(string motDePasse)
+        {
+            try
+            {
+                using SHA256 sha = SHA256.Create();
+                byte[] bytes = sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(motDePasse));
+                return Convert.ToHexString(bytes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors du hash du mot de passe : " + ex.Message);
+                return null;
+            }
+        }
+
+        public bool Connecter(string nomUtilisateur, string motDePasse)
+        {
+            try
+            {
+                string hashPass = HashMotDePasse(motDePasse);
+
+                if (hashPass == null)
+                    return false;
+
+                using MySqlConnection con = new(ConnectionString);
+                con.Open();
+
+                using MySqlCommand cmd = new(
+                    "SELECT * FROM utilisateur WHERE nomUtilisateur=@u AND motDePasse=@p AND estAdmin=1", con);
+
+                cmd.Parameters.AddWithValue("@u", nomUtilisateur);
+                cmd.Parameters.AddWithValue("@p", hashPass);
+
+                using var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    AdminConnecte = new Admin(nomUtilisateur, motDePasse, true);
+                    return true;
+                }
+
+                return false;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Erreur MySQL lors de la connexion : " + ex.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur inattendue lors de la connexion : " + ex.Message);
+                return false;
+            }
+        }
+
+
         public void Deconnecter()
         {
-            AdminConnecte = null;
+            try
+            {
+                AdminConnecte = null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de la déconnexion : " + ex.Message);
+            }
         }
 
         public bool EstAdminConnecte()
         {
-            return AdminConnecte != null && AdminConnecte.EstAdmin;
+            try
+            {
+                return AdminConnecte != null && AdminConnecte.EstAdmin;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de la vérification de l'état admin : " + ex.Message);
+                return false;
+            }
         }
     }
 }
