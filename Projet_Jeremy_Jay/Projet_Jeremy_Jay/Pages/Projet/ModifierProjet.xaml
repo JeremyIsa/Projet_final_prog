@@ -7,56 +7,59 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid Padding="30">
-        <StackPanel Width="450" Spacing="15">
+
+    <ScrollViewer>
+        <Grid Padding="30">
+            <StackPanel Width="450" Spacing="15">
 
 
-            <TextBlock Text="Modifier un projet" FontSize="28" FontWeight="Bold"/>
+                <TextBlock Text="Modifier un projet" FontSize="28" FontWeight="Bold"/>
 
 
-         
-            <ComboBox x:Name="cbClients" Header="Client" PlaceholderText="Sélectionner un client"/>
-            <TextBlock x:Name="errClient" Foreground="Red" FontSize="12"/>
+
+                <ComboBox x:Name="cbClients" Header="Client" PlaceholderText="Sélectionner un client"/>
+                <TextBlock x:Name="errClient" Foreground="Red" FontSize="12"/>
 
 
-          
-            <TextBox x:Name="txtTitre" Header="Titre du projet"/>
-            <TextBlock x:Name="errTitre" Foreground="Red" FontSize="12"/>
+
+                <TextBox x:Name="txtTitre" Header="Titre du projet"/>
+                <TextBlock x:Name="errTitre" Foreground="Red" FontSize="12"/>
 
 
-            <TextBox x:Name="txtDescription" Header="Description" AcceptsReturn="True" Height="100" TextWrapping="Wrap"/>
-            <TextBlock x:Name="errDescription" Foreground="Red" FontSize="12"/>
+                <TextBox x:Name="txtDescription" Header="Description" AcceptsReturn="True" Height="100" TextWrapping="Wrap"/>
+                <TextBlock x:Name="errDescription" Foreground="Red" FontSize="12"/>
 
 
-        
-            <CalendarDatePicker x:Name="dpDateDebut" Header="Date de début"/>
-            <TextBlock x:Name="errDateDebut" Foreground="Red" FontSize="12"/>
+
+                <CalendarDatePicker x:Name="dpDateDebut" Header="Date de début"/>
+                <TextBlock x:Name="errDateDebut" Foreground="Red" FontSize="12"/>
 
 
-          
-            <TextBox x:Name="txtBudget" Header="Budget (en $)" InputScope="Number"/>
-            <TextBlock x:Name="errBudget" Foreground="Red" FontSize="12"/>
+
+                <TextBox x:Name="txtBudget" Header="Budget (en $)" InputScope="Number"/>
+                <TextBlock x:Name="errBudget" Foreground="Red" FontSize="12"/>
 
 
-      
-            <NumberBox x:Name="nbEmployesRequis" Header="Nb employés (1 à 5)" Minimum="1" Maximum="5"/>
-            <TextBlock x:Name="errNbEmployes" Foreground="Red" FontSize="12"/>
+
+                <NumberBox x:Name="nbEmployesRequis" Header="Nb employés (1 à 5)" Minimum="1" Maximum="5"/>
+                <TextBlock x:Name="errNbEmployes" Foreground="Red" FontSize="12"/>
 
 
-           
-            <ComboBox x:Name="cbStatut" Header="Statut">
-                <ComboBoxItem Content="En cours"/>
-                <ComboBoxItem Content="Terminé"/>
-            </ComboBox>
-            <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12"/>
+
+                <ComboBox x:Name="cbStatut" Header="Statut">
+                    <ComboBoxItem Content="En cours"/>
+                    <ComboBoxItem Content="Terminé"/>
+                </ComboBox>
+                <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12"/>
 
 
-            <Button Content="Modifier le projet" Background="#0066CC" Foreground="White" Margin="0,20,0,0" Click="BtnModifierProjet_Click"/>
+                <Button Content="Modifier le projet" Background="#0066CC" Foreground="White" Margin="0,20,0,0" Click="BtnModifierProjet_Click"/>
 
 
-            <TextBlock x:Name="txtMessage" FontWeight="Bold"/>
+                <TextBlock x:Name="txtMessage" FontWeight="Bold"/>
 
 
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+            </Grid>
+    </ScrollViewer>
 </Page>
