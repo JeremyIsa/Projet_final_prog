@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <ScrollViewer>
-        <Grid Padding="30">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid Padding="30">
 
             <Button Content="⟵ Retour"
                     HorizontalAlignment="Left"

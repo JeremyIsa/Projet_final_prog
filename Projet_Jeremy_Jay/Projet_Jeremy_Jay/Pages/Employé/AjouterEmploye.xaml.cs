@@ -148,7 +148,11 @@ namespace Projet_Jeremy_Jay.Pages.Employé
                 }
             }
 
-         
+            if (string.IsNullOrWhiteSpace(adresse))
+            {
+                errAdresse.Text = "Veuillez entrer une adresse.";
+                valide = false;
+            }
             if (dpEmbauche.SelectedDate != null)
             {
                 DateTime embauche = date_embauche.ToDateTime(new TimeOnly(0, 0));

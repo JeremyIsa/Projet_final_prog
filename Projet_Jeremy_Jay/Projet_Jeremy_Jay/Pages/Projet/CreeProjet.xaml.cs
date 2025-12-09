@@ -57,7 +57,6 @@ namespace Projet_Jeremy_Jay.Pages.Projet
 
         private void BtnCreerProjet_Click(object sender, RoutedEventArgs e)
         {
-           
             errClient.Text = "";
             errTitre.Text = "";
             errDescription.Text = "";
@@ -65,10 +64,7 @@ namespace Projet_Jeremy_Jay.Pages.Projet
             errBudget.Text = "";
             errNbEmployes.Text = "";
 
-
             bool valide = true;
-        
-
 
             if (cbClients.SelectedValue == null)
             {
@@ -76,27 +72,22 @@ namespace Projet_Jeremy_Jay.Pages.Projet
                 valide = false;
             }
 
-
             string titre = txtTitre.Text.Trim();
             string description = txtDescription.Text.Trim();
             DateTime? dateDebut = dpDateDebut.Date?.DateTime;
             string budgetStr = txtBudget.Text.Trim();
 
-
-        
             if (string.IsNullOrWhiteSpace(titre))
             {
                 errTitre.Text = "Veuillez entrer un titre.";
                 valide = false;
             }
 
-
             if (string.IsNullOrWhiteSpace(description))
             {
                 errDescription.Text = "Veuillez entrer une description.";
                 valide = false;
             }
-
 
             if (dateDebut == null)
             {
@@ -109,8 +100,6 @@ namespace Projet_Jeremy_Jay.Pages.Projet
                 valide = false;
             }
 
-
-         
             if (!double.TryParse(budgetStr, out double budget))
             {
                 errBudget.Text = "Budget invalide.";
@@ -122,15 +111,35 @@ namespace Projet_Jeremy_Jay.Pages.Projet
                 valide = false;
             }
 
-
             int nbEmployes = (int)nbEmployesRequis.Value;
-
 
             if (nbEmployes < 1 || nbEmployes > 5)
             {
                 errNbEmployes.Text = "Le nombre d’employés doit être entre 1 et 5.";
                 valide = false;
             }
+
+            if (!valide)
+                return;
+
+            Classes.Projet p = new Classes.Projet(
+                num_projet: "", 
+                titre: titre,
+                date_debut: dateDebut.Value,
+                description: description,
+                budget: budget,
+                nb_employe: nbEmployes,
+                total_salaire: 0,
+                id_client: (int)cbClients.SelectedValue,
+                statut: "En cours"
+            );
+
+            bool ok = SingletonProjet.getInstance().AjouterProjet(p);
+
+            if (ok)
+                txtMessage.Text = "Projet ajouté avec succès!";
+            else
+                txtMessage.Text = "Erreur lors de l'ajout du projet.";
         }
     }
 }
