@@ -1,8 +1,8 @@
 Distribution des tâches
 
 Jay :
-[ ] MenuBar
-[  ] NavigationView
+[x ] MenuBar
+[ x ] NavigationView
 
 [  ] Employé
 [  ] Moitié projet
@@ -26,13 +26,13 @@ Résumé des pages à faire :
 [  ] MenuBar pour l'exportation
 [  ] NavigationView principale
 
-[  ] Page AfficherEmploye
-[  ] Page AjouterEmploye
-[  ] Page ModifierEmploye
+[x  ] Page AfficherEmploye
+[ x ] Page AjouterEmploye
+[ x ] Page ModifierEmploye
 
-[  ] Page AfficherClient
-[  ] Page AjouterClient
-[  ] Page ModifierClient
+[x  ] Page AfficherClient
+[ x ] Page AjouterClient
+[ x ] Page ModifierClient
 
 [  ] Page AfficherProjet
 [  ] Page DétailsProjets
