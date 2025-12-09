@@ -182,7 +182,7 @@ namespace Projet_Jeremy_Jay
                     conn.Open();
 
                     MySqlCommand cmd = new MySqlCommand(
-                        "SELECT numero_projet FROM projet WHERE id_projet = @id",
+                        "SELECT numero_projet FROM projet WHERE numero_projet = @id",
                         conn);
 
                     cmd.Parameters.AddWithValue("@id", idProjet);
