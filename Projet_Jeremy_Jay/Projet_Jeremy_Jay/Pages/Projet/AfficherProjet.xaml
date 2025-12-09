@@ -19,7 +19,7 @@
 
         <!-- BOUTON AJOUTER -->
         <Button x:Name="btnAjouterProjet"
-                Content="Assigner un employer"
+                Content="Assigner un employé"
                 Grid.Row="1"
                 Width="200"
                 Height="40"

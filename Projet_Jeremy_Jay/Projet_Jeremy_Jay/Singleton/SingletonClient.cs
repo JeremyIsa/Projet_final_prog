@@ -107,20 +107,23 @@ namespace Projet_Jeremy_Jay
 
         public void modifierClient(Client c)
         {
+
             try
             {
                 using MySqlConnection con = new MySqlConnection(connectionString);
                 using MySqlCommand cmd = new MySqlCommand("modifier_client", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@nom", c.Nom);
-                cmd.Parameters.AddWithValue("@adresse", c.Adresse);
-                cmd.Parameters.AddWithValue("@telephone", c.Num_tel);
-                cmd.Parameters.AddWithValue("@email", c.Email);
-                cmd.Parameters.AddWithValue("@id_client", c.Id_client);
+                cmd.Parameters.AddWithValue("@i_id", c.Id_client);
+                cmd.Parameters.AddWithValue("@i_nom", c.Nom);
+                cmd.Parameters.AddWithValue("@i_adresse", c.Adresse);
+                cmd.Parameters.AddWithValue("@i_telephone", c.Num_tel);
+                cmd.Parameters.AddWithValue("@i_email", c.Email);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
+
+                getAllClient();
             }
             catch (MySqlException ex)
             {

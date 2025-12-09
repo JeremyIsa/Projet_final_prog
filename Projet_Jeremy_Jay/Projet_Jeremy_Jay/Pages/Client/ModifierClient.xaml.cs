@@ -124,6 +124,8 @@ namespace Projet_Jeremy_Jay.Pages.Client
 
             // Sauvegarder en base de données
             SingletonClient.getInstance().modifierClient(clientSelectionne);
+
+            Frame.GoBack();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

@@ -8,71 +8,71 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid RowDefinitions="Auto,*" Padding="20">
-    
-        <TextBlock Text="Assigner un employé à un projet" 
-                   FontSize="28" FontWeight="Bold" Margin="0,0,0,20"/>
+    <ScrollViewer>
 
-  
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <Grid RowDefinitions="Auto,*" Padding="20">
+
+            <TextBlock Text="Assigner un employé à un projet" 
+                   FontSize="28" FontWeight="Bold" Margin="0,0,0,20"/>
+            
             <StackPanel Spacing="20">
-                
-               
-                <StackPanel Spacing="10">
-                    <TextBlock Text="1. Sélectionner un projet" FontSize="18" FontWeight="SemiBold"/>
-                    <ComboBox x:Name="cbProjets" 
+
+
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="1. Sélectionner un projet" FontSize="18" FontWeight="SemiBold"/>
+                        <ComboBox x:Name="cbProjets" 
                               PlaceholderText="Choisir un projet"
                               MinWidth="300"
                               SelectionChanged="cbProjets_SelectionChanged"/>
-                    <TextBlock x:Name="errProjet" Foreground="Red" TextWrapping="Wrap"/>
-                </StackPanel>
+                        <TextBlock x:Name="errProjet" Foreground="Red" TextWrapping="Wrap"/>
+                    </StackPanel>
 
-      
-                <StackPanel Spacing="10">
-                    <TextBlock Text="2. Sélectionner les employés à assigner" FontSize="18" FontWeight="SemiBold"/>
-                    <TextBlock Text="(Les employés en rouge sont déjà assignés à un projet actif)" 
+
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="2. Sélectionner les employés à assigner" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock Text="(Les employés en rouge sont déjà assignés à un projet actif)" 
                                Foreground="Gray" FontSize="12"/>
-                    
-                    <ListView x:Name="lvEmployes"
+
+                        <ListView x:Name="lvEmployes"
                               SelectionMode="Multiple">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Padding="10" ColumnDefinitions="Auto,*,Auto">
-                                    <CheckBox Grid.Column="0" VerticalAlignment="Center"/>
-                                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                                        <TextBlock Text="{Binding Prenom}" FontWeight="Bold"/>
-                                        <TextBlock Text="{Binding Nom}"/>
-                                    </StackPanel>
-                                    <TextBlock Grid.Column="2" 
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="10" ColumnDefinitions="Auto,*,Auto">
+                                        <CheckBox Grid.Column="0" VerticalAlignment="Center"/>
+                                        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                            <TextBlock Text="{Binding Prenom}" FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding Nom}"/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" 
                                                Text="{Binding Statut}" 
                                                Foreground="Gray"
                                                VerticalAlignment="Center"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <TextBlock x:Name="errEmployes" Foreground="Red" TextWrapping="Wrap"/>
-                </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <TextBlock x:Name="errEmployes" Foreground="Red" TextWrapping="Wrap"/>
+                    </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Spacing="10">
-                    <Button x:Name="btnAssigner" 
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button x:Name="btnAssigner" 
                             Content="Assigner l'employé" 
                             Click="btnAssigner_Click"
                             Background="#2E7D32"/>
-                    <Button Content="Annuler" 
+                        <Button Content="Annuler" 
                             Click="btnAnnuler_Click"
                             Background="#D32F2F"/>
-                </StackPanel>
+                    </StackPanel>
 
-           
-                <InfoBar x:Name="infoSuccess"
+
+                    <InfoBar x:Name="infoSuccess"
                          Title="Succès"
                          Message="L'employé a été assigné au projet avec succès."
                          Severity="Success"
                          IsOpen="False"
                          IsClosable="True"/>
 
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
+                </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>
