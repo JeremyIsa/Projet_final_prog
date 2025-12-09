@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -23,9 +24,130 @@ namespace Projet_Jeremy_Jay.Pages.Projet
     /// </summary>
     public sealed partial class ModifierProjet : Page
     {
-        public ModifierProjet()
-        {
-            InitializeComponent();
-        }
+ 
+            private Classes.Projet projetActuel;
+
+            public ModifierProjet()
+            {
+                this.InitializeComponent();
+            }
+
+            protected override void OnNavigatedTo(NavigationEventArgs e)
+            {
+                base.OnNavigatedTo(e);
+
+                projetActuel = e.Parameter as Classes.Projet;
+
+                if (projetActuel == null)
+                {
+                    txtMessage.Text = "Erreur : aucun projet sélectionné.";
+                    return;
+                }
+
+                ChargerClients();
+                RemplirChamps();
+            }
+
+            private void ChargerClients()
+            {
+                try
+                {
+                    var singletonClient = SingletonClient.getInstance();
+                    singletonClient.getAllClient();
+
+                    cbClients.ItemsSource = singletonClient.Liste;
+                    cbClients.DisplayMemberPath = "Nom";
+                    cbClients.SelectedValuePath = "Id_client";
+                }
+                catch (Exception ex)
+                {
+                    txtMessage.Text = "Erreur lors du chargement des clients : " + ex.Message;
+                }
+            }
+
+            private void RemplirChamps()
+            {
+                if (projetActuel == null) return;
+
+                txtTitre.Text = projetActuel.Titre;
+                txtDescription.Text = projetActuel.Description;
+            dpDateDebut.Date = new DateTimeOffset(projetActuel.Date_debut);
+            txtBudget.Text = projetActuel.Budget.ToString();
+                nbEmployesRequis.Value = projetActuel.Nb_employe;
+
+                cbClients.SelectedValue = projetActuel.Id_client;
+
+                cbStatut.SelectedItem = cbStatut.Items
+                    .OfType<ComboBoxItem>()
+                    .FirstOrDefault(i => i.Content.ToString() == projetActuel.Statut);
+            }
+
+            private bool ValiderChamps()
+            {
+                txtMessage.Text = "";
+
+                if (string.IsNullOrWhiteSpace(txtTitre.Text))
+                {
+                    txtMessage.Text = "Veuillez entrer un titre.";
+                    return false;
+                }
+
+                if (!dpDateDebut.Date.HasValue)
+                {
+                    txtMessage.Text = "Veuillez sélectionner une date de début.";
+                    return false;
+                }
+
+                if (!double.TryParse(txtBudget.Text, out double budget))
+                {
+                    txtMessage.Text = "Le budget doit être un nombre valide.";
+                    return false;
+                }
+
+                if (cbClients.SelectedItem == null)
+                {
+                    txtMessage.Text = "Veuillez sélectionner un client.";
+                    return false;
+                }
+
+                if (nbEmployesRequis.Value < 1 || nbEmployesRequis.Value > 5)
+                {
+                    txtMessage.Text = "Le nombre d'employés requis doit être entre 1 et 5.";
+                    return false;
+                }
+
+                if (cbStatut.SelectedItem == null)
+                {
+                    txtMessage.Text = "Veuillez sélectionner un statut.";
+                    return false;
+                }
+
+                return true;
+            }
+
+            private async void BtnModifierProjet_Click(object sender, RoutedEventArgs e)
+            {
+                if (!ValiderChamps()) return;
+
+                projetActuel.Titre = txtTitre.Text;
+                projetActuel.Description = txtDescription.Text;
+            DateTime? dateDebut = dpDateDebut.Date.HasValue ? dpDateDebut.Date.Value.DateTime : (DateTime?)null;
+            projetActuel.Budget = double.Parse(txtBudget.Text);
+                projetActuel.Nb_employe = (int)nbEmployesRequis.Value;
+                projetActuel.Id_client = (int)cbClients.SelectedValue;
+                projetActuel.Statut = (cbStatut.SelectedItem as ComboBoxItem)?.Content.ToString();
+
+                bool success = SingletonProjet.getInstance().ModifierProjet(projetActuel);
+
+                txtMessage.Text = success ? "Projet modifié avec succès !" : "Erreur lors de la modification du projet.";
+
+                if (success)
+                {
+                    // Masquer le message après 3 secondes
+                    await Task.Delay(3000);
+                    txtMessage.Text = "";
+                }
+            }
+
     }
 }

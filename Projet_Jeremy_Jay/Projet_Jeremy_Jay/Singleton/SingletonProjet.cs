@@ -196,6 +196,45 @@ namespace Projet_Jeremy_Jay
 
             return "";
         }
+
+        public bool ModifierProjet(Projet projet)
+        {
+            try
+            {
+                using MySqlConnection conn = new MySqlConnection(connectionString);
+                conn.Open();
+
+                using MySqlCommand cmd = new MySqlCommand("modifier_projet", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@i_numero_projet", projet.Num_projet);
+                cmd.Parameters.AddWithValue("@i_titre", projet.Titre);
+                cmd.Parameters.AddWithValue("@i_description", projet.Description);
+                cmd.Parameters.AddWithValue("@i_budget", projet.Budget);
+                cmd.Parameters.AddWithValue("@i_nb_employes_requis", projet.Nb_employe);
+                cmd.Parameters.AddWithValue("@i_total_salaires", projet.Total_salaire);
+                cmd.Parameters.AddWithValue("@i_id_client", projet.Id_client);
+                cmd.Parameters.AddWithValue("@i_statut", projet.Statut);
+
+                cmd.ExecuteNonQuery();
+
+                // Met à jour la liste locale
+                var existant = ListeProjet.FirstOrDefault(p => p.Num_projet == projet.Num_projet);
+                if (existant != null)
+                {
+                    int index = ListeProjet.IndexOf(existant);
+                    ListeProjet[index] = projet;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur ModifierProjet : " + ex.Message);
+                return false;
+            }
+        }
+
     }
 }
 

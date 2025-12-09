@@ -7,8 +7,63 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Grid Padding="30">
+        <StackPanel Width="450" Spacing="15">
 
-    <Grid>
+            <TextBlock Text="Modifier un projet"
+                       FontSize="28"
+                       FontWeight="Bold"/>
 
+            <!-- Client -->
+            <ComboBox x:Name="cbClients"
+                      Header="Client"
+                      PlaceholderText="Sélectionner un client"/>
+
+            <!-- Titre -->
+            <TextBox x:Name="txtTitre"
+                     Header="Titre du projet"/>
+
+            <!-- Description -->
+            <TextBox x:Name="txtDescription"
+                     Header="Description"
+                     AcceptsReturn="True"
+                     Height="100"
+                     TextWrapping="Wrap"/>
+
+            <!-- Date début -->
+            <CalendarDatePicker x:Name="dpDateDebut"
+                                Header="Date de début"/>
+
+            <!-- Budget -->
+            <TextBox x:Name="txtBudget"
+                     Header="Budget (en $)"
+                     InputScope="Number"/>
+
+            <!-- Nb employés requis -->
+            <NumberBox x:Name="nbEmployesRequis"
+                       Header="Nombre d’employés requis (max 5)"
+                       Minimum="1"
+                       Maximum="5"
+                       Value="1"/>
+
+            <!-- Statut -->
+            <ComboBox x:Name="cbStatut"
+                      Header="Statut"
+                      PlaceholderText="Sélectionner le statut">
+                <ComboBoxItem Content="En cours"/>
+                <ComboBoxItem Content="Terminé"/>
+            </ComboBox>
+
+            <Button Content="Modifier le projet"
+                    Background="#0066CC"
+                    Foreground="White"
+                    Margin="0,20,0,0"
+                    Click="BtnModifierProjet_Click"/>
+
+            <TextBlock x:Name="txtMessage"
+                       Foreground="Green"
+                       FontWeight="SemiBold"/>
+
+        </StackPanel>
     </Grid>
 </Page>

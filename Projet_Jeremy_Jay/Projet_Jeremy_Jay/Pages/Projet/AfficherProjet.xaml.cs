@@ -64,10 +64,10 @@ namespace Projet_Jeremy_Jay.Pages.Projet
                 return;
             }
 
-            var bouton = sender as Button;
-            var projet = bouton.DataContext as Classes.Projet;
 
-            Frame.Navigate(typeof(ModifierProjet), projet);
+            var bouton = sender as Button;
+            if (bouton?.DataContext is Classes.Projet projet)
+                Frame.Navigate(typeof(ModifierProjet), projet);
 
 
         }
