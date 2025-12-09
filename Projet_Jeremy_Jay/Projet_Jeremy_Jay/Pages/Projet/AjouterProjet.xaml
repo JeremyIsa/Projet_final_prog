@@ -9,15 +9,15 @@
     mc:Ignorable="d">
 
     <Grid RowDefinitions="Auto,*" Padding="20">
-        <!-- En-tête -->
+    
         <TextBlock Text="Assigner un employé à un projet" 
                    FontSize="28" FontWeight="Bold" Margin="0,0,0,20"/>
 
-        <!-- Contenu principal -->
+  
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Spacing="20">
                 
-                <!-- Section Sélection du Projet -->
+               
                 <StackPanel Spacing="10">
                     <TextBlock Text="1. Sélectionner un projet" FontSize="18" FontWeight="SemiBold"/>
                     <ComboBox x:Name="cbProjets" 
@@ -27,7 +27,7 @@
                     <TextBlock x:Name="errProjet" Foreground="Red" TextWrapping="Wrap"/>
                 </StackPanel>
 
-                <!-- Section Sélection des Employés -->
+      
                 <StackPanel Spacing="10">
                     <TextBlock Text="2. Sélectionner les employés à assigner" FontSize="18" FontWeight="SemiBold"/>
                     <TextBlock Text="(Les employés en rouge sont déjà assignés à un projet actif)" 
@@ -54,7 +54,6 @@
                     <TextBlock x:Name="errEmployes" Foreground="Red" TextWrapping="Wrap"/>
                 </StackPanel>
 
-                <!-- Boutons -->
                 <StackPanel Orientation="Horizontal" Spacing="10">
                     <Button x:Name="btnAssigner" 
                             Content="Assigner l'employé" 
@@ -65,7 +64,7 @@
                             Background="#D32F2F"/>
                 </StackPanel>
 
-                <!-- Message de succès -->
+           
                 <InfoBar x:Name="infoSuccess"
                          Title="Succès"
                          Message="L'employé a été assigné au projet avec succès."

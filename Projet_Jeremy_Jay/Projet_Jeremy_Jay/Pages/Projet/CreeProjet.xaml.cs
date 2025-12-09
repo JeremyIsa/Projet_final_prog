@@ -57,69 +57,79 @@ namespace Projet_Jeremy_Jay.Pages.Projet
 
         private void BtnCreerProjet_Click(object sender, RoutedEventArgs e)
         {
-            try
+           
+            errClient.Text = "";
+            errTitre.Text = "";
+            errDescription.Text = "";
+            errDateDebut.Text = "";
+            errBudget.Text = "";
+            errNbEmployes.Text = "";
+
+
+            bool valide = true;
+        
+
+
+            if (cbClients.SelectedValue == null)
             {
-                if (cbClients.SelectedValue == null)
-                {
-                    txtMessage.Text = "Veuillez sélectionner un client.";
-                    return;
-                }
-
-                int idClient = (int)cbClients.SelectedValue;
-
-                string titre = txtTitre.Text.Trim();
-                string description = txtDescription.Text.Trim();
-                DateTime? dateDebut = dpDateDebut.Date?.DateTime;
-
-                if (string.IsNullOrWhiteSpace(titre) ||
-                    string.IsNullOrWhiteSpace(description) ||
-                    dateDebut == null)
-                {
-                    txtMessage.Text = "Veuillez remplir correctement les champs.";
-                    return;
-                }
-
-                if (!double.TryParse(txtBudget.Text, out double budget))
-                {
-                    txtMessage.Text = "Budget invalide.";
-                    return;
-                }
-
-                int nbEmployes = (int)nbEmployesRequis.Value;
-
-               Classes.Projet nouveauProjet = new Classes.Projet(
-    null,
-    titre,
-    dateDebut.Value,
-    description,
-    budget,
-    nbEmployes,
-    0.0,          
-    idClient,
-    "En cours"
-);
-
-                bool ok = SingletonProjet.getInstance().AjouterProjet(nouveauProjet);
-
-                if (ok)
-                {
-                    txtMessage.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Green);
-                    txtMessage.Text = "Projet créé avec succès !";
-
-                    txtTitre.Text = "";
-                    txtDescription.Text = "";
-                    txtBudget.Text = "";
-                    dpDateDebut.Date = null;
-                    nbEmployesRequis.Value = 1;
-                }
-                else
-                {
-                    txtMessage.Text = "Erreur : le projet n’a pas pu être créé.";
-                }
+                errClient.Text = "Veuillez sélectionner un client.";
+                valide = false;
             }
-            catch (Exception ex)
+
+
+            string titre = txtTitre.Text.Trim();
+            string description = txtDescription.Text.Trim();
+            DateTime? dateDebut = dpDateDebut.Date?.DateTime;
+            string budgetStr = txtBudget.Text.Trim();
+
+
+        
+            if (string.IsNullOrWhiteSpace(titre))
             {
-                txtMessage.Text = "Erreur : " + ex.Message;
+                errTitre.Text = "Veuillez entrer un titre.";
+                valide = false;
+            }
+
+
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                errDescription.Text = "Veuillez entrer une description.";
+                valide = false;
+            }
+
+
+            if (dateDebut == null)
+            {
+                errDateDebut.Text = "Veuillez choisir une date de début.";
+                valide = false;
+            }
+            else if (dateDebut > DateTime.Today.AddYears(1))
+            {
+                errDateDebut.Text = "La date ne peut pas dépasser 1 an dans le futur.";
+                valide = false;
+            }
+
+
+         
+            if (!double.TryParse(budgetStr, out double budget))
+            {
+                errBudget.Text = "Budget invalide.";
+                valide = false;
+            }
+            else if (budget < 100)
+            {
+                errBudget.Text = "Le budget doit être au minimum de 100$.";
+                valide = false;
+            }
+
+
+            int nbEmployes = (int)nbEmployesRequis.Value;
+
+
+            if (nbEmployes < 1 || nbEmployes > 5)
+            {
+                errNbEmployes.Text = "Le nombre d’employés doit être entre 1 et 5.";
+                valide = false;
             }
         }
     }

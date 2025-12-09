@@ -82,50 +82,73 @@ namespace Projet_Jeremy_Jay.Pages.Projet
                     .FirstOrDefault(i => i.Content.ToString() == projetActuel.Statut);
             }
 
-            private bool ValiderChamps()
+        private bool ValiderChamps()
+        {
+           
+            errClient.Text = "";
+            errTitre.Text = "";
+            errDescription.Text = "";
+            errDateDebut.Text = "";
+            errBudget.Text = "";
+            errNbEmployes.Text = "";
+            errStatut.Text = "";
+        
+
+            bool estValide = true;
+
+            
+            if (string.IsNullOrWhiteSpace(txtTitre.Text))
             {
-                txtMessage.Text = "";
-
-                if (string.IsNullOrWhiteSpace(txtTitre.Text))
-                {
-                    txtMessage.Text = "Veuillez entrer un titre.";
-                    return false;
-                }
-
-                if (!dpDateDebut.Date.HasValue)
-                {
-                    txtMessage.Text = "Veuillez sélectionner une date de début.";
-                    return false;
-                }
-
-                if (!double.TryParse(txtBudget.Text, out double budget))
-                {
-                    txtMessage.Text = "Le budget doit être un nombre valide.";
-                    return false;
-                }
-
-                if (cbClients.SelectedItem == null)
-                {
-                    txtMessage.Text = "Veuillez sélectionner un client.";
-                    return false;
-                }
-
-                if (nbEmployesRequis.Value < 1 || nbEmployesRequis.Value > 5)
-                {
-                    txtMessage.Text = "Le nombre d'employés requis doit être entre 1 et 5.";
-                    return false;
-                }
-
-                if (cbStatut.SelectedItem == null)
-                {
-                    txtMessage.Text = "Veuillez sélectionner un statut.";
-                    return false;
-                }
-
-                return true;
+                errTitre.Text = "Veuillez entrer un titre.";
+                estValide = false;
             }
 
-            private async void BtnModifierProjet_Click(object sender, RoutedEventArgs e)
+            if (string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                errDescription.Text = "Veuillez entrer une description.";
+                estValide = false;
+            }
+
+            if (cbClients.SelectedItem == null)
+            {
+                errClient.Text = "Veuillez sélectionner un client.";
+                estValide = false;
+            }
+
+            if (!dpDateDebut.Date.HasValue)
+            {
+                errDateDebut.Text = "Veuillez sélectionner une date de début.";
+                estValide = false;
+            }
+
+            if (!double.TryParse(txtBudget.Text, out double budget))
+            {
+                errBudget.Text = "Le budget doit être un nombre valide.";
+                estValide = false;
+            }
+            else if (budget < 100)
+            {
+                errBudget.Text = "Le budget doit être d'au moins 100 $.";
+                estValide = false;
+            }
+
+
+            if (nbEmployesRequis.Value < 1 || nbEmployesRequis.Value > 5)
+            {
+                errNbEmployes.Text = "Le nombre d'employés requis doit être entre 1 et 5.";
+                estValide = false;
+            }
+
+            
+            if (cbStatut.SelectedItem == null)
+            {
+                errStatut.Text = "Veuillez sélectionner un statut.";
+                estValide = false;
+            }
+
+            return estValide;
+        }
+        private async void BtnModifierProjet_Click(object sender, RoutedEventArgs e)
             {
                 if (!ValiderChamps()) return;
 
@@ -143,7 +166,7 @@ namespace Projet_Jeremy_Jay.Pages.Projet
 
                 if (success)
                 {
-                    // Masquer le message après 3 secondes
+               
                     await Task.Delay(3000);
                     txtMessage.Text = "";
                 }
