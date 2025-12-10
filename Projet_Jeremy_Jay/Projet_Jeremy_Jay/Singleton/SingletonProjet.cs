@@ -218,7 +218,7 @@ namespace Projet_Jeremy_Jay
 
                 cmd.ExecuteNonQuery();
 
-                // Met à jour la liste locale
+             
                 var existant = ListeProjet.FirstOrDefault(p => p.Num_projet == projet.Num_projet);
                 if (existant != null)
                 {

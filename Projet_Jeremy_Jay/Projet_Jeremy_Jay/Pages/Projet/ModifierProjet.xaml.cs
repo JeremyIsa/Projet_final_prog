@@ -150,7 +150,11 @@ namespace Projet_Jeremy_Jay.Pages.Projet
         }
         private async void BtnModifierProjet_Click(object sender, RoutedEventArgs e)
             {
-                if (!ValiderChamps()) return;
+
+
+          
+
+            if (!ValiderChamps()) return;
 
                 projetActuel.Titre = txtTitre.Text;
                 projetActuel.Description = txtDescription.Text;
@@ -163,14 +167,25 @@ namespace Projet_Jeremy_Jay.Pages.Projet
                 bool success = SingletonProjet.getInstance().ModifierProjet(projetActuel);
 
                 txtMessage.Text = success ? "Projet modifié avec succès !" : "Erreur lors de la modification du projet.";
+            if (success)
+            {
+                infoSuccess.IsOpen = true;   
 
-                if (success)
-                {
-               
-                    await Task.Delay(3000);
-                    txtMessage.Text = "";
-                }
+                await Task.Delay(2500);     
+
+                infoSuccess.IsOpen = false;  
+
+                Frame.GoBack();             
             }
-
+            else
+            {
+                txtMessage.Text = "Erreur lors de la modification du projet.";
+            }
+        }
+     
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
     }
 }

@@ -9,9 +9,24 @@
     mc:Ignorable="d">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+
+
         <Grid Padding="30">
+
+
+
+            <InfoBar x:Name="infoSuccess"
+             IsOpen="False"
+             Severity="Success"
+             Title="Succès"
+             Message="Le projet a été modiffier avec succès!"
+             Margin="0,0,0,15"/>
+
+
             <StackPanel Width="450" Spacing="15">
 
+                
 
                 <TextBlock Text="Modifier un projet" FontSize="28" FontWeight="Bold"/>
 
@@ -53,8 +68,12 @@
                 <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12"/>
 
 
-                <Button Content="Modifier le projet" Background="#0066CC" Foreground="White" Margin="0,20,0,0" Click="BtnModifierProjet_Click"/>
+           
 
+                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,10,0,0">
+                    <Button Content="Sauvegarder" Background="LightGreen" Click="BtnModifierProjet_Click"/>
+                    <Button Content="Annuler" Background="LightGray" Click="Button_Click"/>
+                </StackPanel>
 
                 <TextBlock x:Name="txtMessage" FontWeight="Bold"/>
 
