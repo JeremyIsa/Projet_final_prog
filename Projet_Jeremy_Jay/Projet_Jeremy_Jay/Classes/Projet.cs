@@ -41,6 +41,11 @@ namespace Projet_Jeremy_Jay.Classes
         public int Id_client { get => id_client; set => id_client = value; }
         public string Statut { get => statut; set => statut = value; }
 
+        public string stringCSV()
+        {
+            return $"{num_projet};{titre};{date_debut.ToShortDateString()};{description};{budget};{nb_employe};{total_salaire};{id_client};{statut}";
+        }
+
         public override string ToString()
         {
             return $"\nNuméro du projet : {num_projet}" +

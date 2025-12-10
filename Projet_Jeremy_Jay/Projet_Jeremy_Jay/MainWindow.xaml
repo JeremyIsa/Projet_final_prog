@@ -21,9 +21,9 @@
 
         <MenuBar Grid.Row="0" >
             <MenuBarItem Title="Fichier" >
-                <MenuFlyoutItem Text="Exporter" Tag="exporter" Click="gestion_clic_item_menu"/>
+                <MenuFlyoutItem x:Name="btnExporter" Text="Exporter" Tag="exporter" Click="btnExporter_Click"/>
                 <MenuFlyoutSeparator />
-                <MenuFlyoutItem Text="Quitter" Tag="quitter" Click="gestion_clic_item_menu"/>
+                <MenuFlyoutItem x:Name="btnQuitter" Text="Quitter" Tag="quitter" Click="btnQuitter_Click"/>
             </MenuBarItem>
         </MenuBar>
 

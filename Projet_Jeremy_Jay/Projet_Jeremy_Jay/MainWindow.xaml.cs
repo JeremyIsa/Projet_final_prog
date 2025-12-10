@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Projet_Jeremy_Jay.Classes;
 using Projet_Jeremy_Jay.Pages.Client;
 using Projet_Jeremy_Jay.Pages.Connexion;
 using Projet_Jeremy_Jay.Pages.Employé;
@@ -33,26 +34,6 @@ namespace Projet_Jeremy_Jay
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void gestion_clic_item_menu(object sender, RoutedEventArgs e)
-        {
-            var item = sender as MenuFlyoutItem;
-            if (item != null)
-            {
-                switch (item.Tag)
-                {
-                    case "exporter":
-                       
-                        break;
-   
-                    case "quitter":
-                        Application.Current.Exit();
-                        break;
-                }
-
-
-            }
         }
 
         private void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -98,8 +79,26 @@ namespace Projet_Jeremy_Jay
                 mainFrame.GoBack();
         }
 
+        private async void btnExporter_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
 
-     
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+            picker.SuggestedFileName = "Laboratoire_final";
+            picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
 
+            Windows.Storage.StorageFile monFicher = await picker.PickSaveFileAsync();
+
+            List<Projet> liste = SingletonProjet.getInstance().Liste.ToList();
+
+            if(monFicher != null)
+                await Windows.Storage.FileIO.WriteLinesAsync(monFicher, liste.ConvertAll(x => x.stringCSV()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+        }
+
+        private void btnQuitter_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
     }
 }
