@@ -73,7 +73,7 @@ namespace Projet_Jeremy_Jay.Singleton
             }
         }
 
-  
+        // Hashage du mot de passe avec SHA-256 avec les note de cours
         private string HashMotDePasse(string motDePasse)
         {
             try

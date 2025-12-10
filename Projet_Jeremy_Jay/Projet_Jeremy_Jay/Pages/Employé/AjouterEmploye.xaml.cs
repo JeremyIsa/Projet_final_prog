@@ -173,20 +173,20 @@ namespace Projet_Jeremy_Jay.Pages.Employé
 
             if (!valide) return;
 
-            // AJOUT EN BD
+         
             SingletonEmploye.getInstance().ajouterEmploye(
                 prenom, nom, date_naissance, email, adresse,
                 date_embauche, tauxHoraire, photo, statut
             );
 
-            // MESSAGE SUCCÈS
+         // fait avec la gallerie winui
             infoSuccess.IsOpen = true;
             var _ = Task.Delay(3000).ContinueWith(_ =>
             {
                 DispatcherQueue.TryEnqueue(() => infoSuccess.IsOpen = false);
             });
 
-            // RESET FORMULAIRE
+          
             tbxPrenom.Text = "";
             tbxNom.Text = "";
             tbxEmail.Text = "";
